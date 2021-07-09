@@ -1,0 +1,1 @@
+/home/amir/.startup.sh

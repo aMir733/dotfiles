@@ -1,0 +1,1 @@
+/home/amir/.mozilla/firefox/24dd72wj.default-esr/chrome/user.js

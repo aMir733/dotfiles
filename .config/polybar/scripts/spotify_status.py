@@ -1,0 +1,1 @@
+/home/amir/.config/polybar/scripts/spotify_status.py
