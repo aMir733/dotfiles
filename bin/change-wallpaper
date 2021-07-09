@@ -1,1 +1,6 @@
-/home/amir/bin/change-wallpaper
+#!/bin/bash
+cat > $HOME/.fehbg << EOF
+#!/bin/sh
+feh --no-fehbg --bg-scale $1 
+EOF
+$HOME/.fehbg

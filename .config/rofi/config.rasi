@@ -1,1 +1,4 @@
-/home/amir/.config/rofi/config.rasi
+/** Basic config file **/
+
+configuration {
+}

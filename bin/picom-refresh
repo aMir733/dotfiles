@@ -1,1 +1,1 @@
-/home/amir/bin/picom-refresh
+killall picom ; picom &

@@ -1,1 +1,28 @@
-/home/amir/.prof
+## PATHS
+
+# Default Path
+export PATH=/usr/sbin:/sbin:/usr/local/bin:/usr/bin:/bin:/usr/games
+# Bins
+export PATH=$HOME/bin:$HOME/.local/bin:$PATH
+
+# Spicetify
+export PATH=$PATH:$HOME/spicetify-cli
+
+# Rust and Cargo
+export PATH=$PATH:$HOME/.cargo/bin
+
+# Go
+export GOPATH=$HOME/.local/go
+export PATH=$PATH:$HOME/.local/go/bin
+
+
+## ALIASES
+
+# ls
+alias l='ls -lah'
+# Highlighted cat
+alias c='pygmentize -g'
+
+
+## Env
+

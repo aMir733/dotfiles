@@ -1,1 +1,2 @@
-/home/amir/bin/notifytrans
+#!/usr/bin/env bash
+notify-send --icon=info "$(xsel -o)" "$(xsel -o | trans -b -t fa)"

@@ -1,1 +1,1 @@
-/home/amir/.xinitrc
+exec dbus-launch --exit-with-session i3

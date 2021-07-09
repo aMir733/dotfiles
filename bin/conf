@@ -1,1 +1,44 @@
-/home/amir/bin/conf
+#!/bin/bash
+
+case $1 in
+	i3)
+		vim $HOME/.config/i3/config
+		exit
+		;;
+	picom)
+		vim $HOME/.config/picom/picom.conf
+		exit
+		;;
+	polybar)
+		vim $HOME/.config/polybar/config -c 'set filetype=dosini'
+		exit
+		;;
+	kitty)
+		vim $HOME/.config/kitty/kitty.conf
+		exit
+		;;
+	vim)
+		vim $HOME/.vimrc
+		exit
+		;;
+	startup)
+		vim $HOME/.startup.sh
+		exit
+		;;
+	rofi)
+		vim $HOME/.config/rofi/config.rasi
+		exit
+		;;
+	conf)
+		vim $HOME/bin/conf
+		exit
+		;;
+	dunst)
+		vim $HOME/.config/dunst/dunstrc -c 'set filetype=cfg'
+		exit
+		;;
+	*)
+		echo "Invalid Input. Usage: conf [i3,picom,polybar]"
+		exit
+		;;
+esac

@@ -1,1 +1,95 @@
-/home/amir/.config/polybar/config
+[colors]
+text = #000
+
+[fix]
+; If time isn't centered, add/delete spaces to/from the end of this line:
+time = "[ %H:%M ]  "
+
+
+[bar/center]
+width = 100%
+height = 30
+offset-x = 0
+offset-y = 4
+radius = 0
+fixed-center = true
+
+background = #00000000
+foreground = ${colors.text}
+
+padding-left = 2
+padding-right = 2
+
+module-margin-left = 0
+module-margin-right = 0
+
+font-0 = Open Sans Light:pixelsize=16
+font-1 = Open Sans Light:pixelsize=18
+font-2 = Open Sans:pixelsize=18
+font-3 = Guifx v2 Transports:pixelsize=10
+
+modules-left = i3
+modules-center = date
+modules-right = ip spotify
+
+separator = "  "
+
+wm-restack = i3
+
+override-redirect = true
+
+cursor-click = pointer
+cursor-scroll = ns-resize
+
+
+[module/i3]
+type = internal/i3
+format = [<label-state>]
+index-sort = true
+wrapping-scroll = false
+
+label-focused = %{T3}%index%%{T-}
+label-focused-padding = 2
+
+label-unfocused = %index%
+label-unfocused-padding = 2
+
+label-visible = %index%
+label-visible-padding = ${self.label-focused-padding}
+
+label-urgent = %{T3}(%index%)${T-}
+label-urgent-padding = 2
+
+label-separator = ,
+
+[module/date]
+type = internal/date
+interval = 60
+format = %{T2}<label>%{T-}
+
+date =
+date-alt = [ %Y-%m-%d
+
+time = ${fix.time}
+time-alt = %H:%M:%S ]
+
+label = %date% %time%
+
+[module/spotify]
+type = custom/script
+interval = 3
+format = [ <label> ]
+exec = python3 .config/polybar/scripts/spotify_status.py -t 60 -q -f '{artist} {play_pause} {song}' -p " 1 , 2 " --playpause-font 4 -c 
+exec-if = pgrep -x spotify
+
+[module/ip]
+type = custom/script
+interval = 30
+format = [ <label> ]
+exec = ip --brief address | awk 'END{ if (substr($3, 1, 6)=="10.10.") {print substr($3, 1, length($3)-3)} else if (substr($3, 1, 3)=="192") {print "!vpn"} else {print ""} }'
+
+
+[settings]
+screenchange-reload = true
+
+; vim: set ft=dosini

@@ -1,1 +1,36 @@
-/home/amir/.mozilla/firefox/24dd72wj.default-esr/chrome/userChrome.css
+/*
+░█▀▀░█▀█░█░░░█▀█░█▀▄░█▀▀
+░█░░░█░█░█░░░█░█░█▀▄░▀▀█
+░▀▀▀░▀▀▀░▀▀▀░▀▀▀░▀░▀░▀▀▀
+
+Load preferred colorscheme
+*/
+
+/* Blurred Color Scheme */
+/*
+@import url('colors/blurred.css');
+*/
+
+/* Solid Color Scheme */
+
+@import url('colors/solid.css');
+
+
+/*
+░█░█░▀█▀░░░█▀▀░█░░░█▀▀░█▄█░█▀▀░█▀█░▀█▀░█▀▀
+░█░█░░█░░░░█▀▀░█░░░█▀▀░█░█░█▀▀░█░█░░█░░▀▀█
+░▀▀▀░▀▀▀░░░▀▀▀░▀▀▀░▀▀▀░▀░▀░▀▀▀░▀░▀░░▀░░▀▀▀
+
+Load Customized Firefox's UI Elements
+*/
+
+@import url('parts/main-window.css');
+@import url('parts/toolbar.css');
+@import url('parts/tabbar.css');
+@import url('parts/urlbar.css');
+@import url('parts/sidebar.css');
+@import url('parts/arrow-panel.css');
+@import url('parts/findbar.css');
+@import url('parts/context-menu.css');
+@import url('parts/customization-window.css');
+@import url('parts/window-controls.css');
