@@ -12,10 +12,10 @@
 - Firefox Homepage: [tilde-enhanced](https://github.com/Ozencb/tilde-enhanced)
 
 # Screenshots
-![Desktop](http://127.0.0.1:8080/desktop.png)
+![Desktop](Pictures/screenshots/desktop.png)
 
-![Firefox](http://127.0.0.1:8080/firefox.png)
+![Firefox](Pictures/screenshots/firefox.png)
 
-![Spotify](http://127.0.0.1:8080/spotify.png)
+![Spotify](Pictures/screenshots/spotify.png)
 
-![Terminal](http://127.0.0.1:8080/terminal.png)
+![Terminal](Pictures/screenshots/terminal.png)
