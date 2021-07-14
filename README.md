@@ -8,6 +8,8 @@
 - Compositor: [picom-ibhagwan](https://github.com/ibhagwan/picom) | [config](.config/picom/picom.conf)
 - Application Launcher: [rofi](https://github.com/davatorium/rofi) | [config](.config/rofi/style.rasi)
 - Spotify Theme: [spicetify](https://github.com/khanhas/Spicetify) | [config](.config/spicetify/config-xpui.ini)
+- Firefox Theme: [blurredfox](https://github.com/manilarome/blurredfox) | [config](.mozilla/firefox/24dd72wj.default-esr/chrome/colors/solid.css)
+- Firefox Homepage: [tilde-enhanced](https://github.com/Ozencb/tilde-enhanced)
 
 # Screenshots
 ![Desktop](Pictures/screenshots/desktop.png)
