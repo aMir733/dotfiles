@@ -2,39 +2,39 @@
 
 case $1 in
 	i3)
-		vim $HOME/.config/i3/config
+		nvim $HOME/.config/i3/config
 		exit
 		;;
 	picom)
-		vim $HOME/.config/picom/picom.conf
+		nvim $HOME/.config/picom/picom.conf
 		exit
 		;;
 	polybar)
-		vim $HOME/.config/polybar/config -c 'set filetype=dosini'
+		nvim $HOME/.config/polybar/config -c 'set filetype=dosini'
 		exit
 		;;
 	kitty)
-		vim $HOME/.config/kitty/kitty.conf
+		nvim $HOME/.config/kitty/kitty.conf
 		exit
 		;;
-	vim)
-		vim $HOME/.vimrc
+	nvim)
+		nvim $HOME/.config/nvim/init.vim
 		exit
 		;;
 	startup)
-		vim $HOME/.startup.sh
+		nvim $HOME/.startup.sh
 		exit
 		;;
 	rofi)
-		vim $HOME/.config/rofi/config.rasi
+		nvim $HOME/.config/rofi/config.rasi
 		exit
 		;;
 	conf)
-		vim $HOME/bin/conf
+		nvim $HOME/bin/conf
 		exit
 		;;
 	dunst)
-		vim $HOME/.config/dunst/dunstrc -c 'set filetype=cfg'
+		nvim $HOME/.config/dunst/dunstrc -c 'set filetype=cfg'
 		exit
 		;;
 	*)
