@@ -5,6 +5,9 @@ export PATH=/usr/sbin:/sbin:/usr/local/bin:/usr/bin:/bin:/usr/games
 # Bins
 export PATH=$HOME/bin:$HOME/.local/bin:$PATH
 
+# Brew
+export PATH=$PATH:/home/linuxbrew/.linuxbrew/bin
+
 # Spicetify
 export PATH=$PATH:$HOME/spicetify-cli
 
@@ -15,13 +18,17 @@ export PATH=$PATH:$HOME/.cargo/bin
 export GOPATH=$HOME/.local/go
 export PATH=$PATH:$HOME/.local/go/bin
 
+# SDK
+export PATH=$PATH:/opt/sdk
+
 
 ## ALIASES
 
 # ls
 alias l='ls -lah'
-# Highlighted cat
-alias c='pygmentize -g'
+# batcat
+alias c='bat --paging=never -p'
+
 
 
 ## Env

@@ -1,0 +1,53 @@
+---
+dest: "~/.dotfiles"
+archive: "~/tmp/dotfiles.tar.gz"
+tasks:
+  - src: "~/.startup.sh"
+  - src: "~/.fehbg"
+  - src: "~/.prof"
+  - src: "~/.zshrc"
+  - src: "~/.xinitrc"
+  - src: "~/.dotfiles.yml"
+    
+  - src: "~/.config/i3/config"
+    subdir: ".config/i3"
+
+  - src: "~/.config/polybar/launch.sh"
+    subdir: ".config/polybar"
+
+  - src: "~/.config/polybar/scripts/spotify_status.py"
+    subdir: ".config/polybar"
+
+  - src: "~/.config/polybar/config"
+    subdir: ".config/polybar"
+
+  - src: "~/.config/spicetify/Themes/Ziro/"
+    subdir: ".config/spicetify/Themes/Ziro"
+
+  - src: "~/.config/spicetify/Extensions/fullAppDisplay.js"
+    subdir: ".config/spicetify/Extensions"
+
+  - src: "~/.config/spicetify/config-xpui.ini"
+    subdir: ".config/spicetify"
+
+  - src: "~/.config/picom/picom.conf"
+    subdir: ".config/picom"
+
+  - src: "~/.config/kitty/kitty.conf"
+    subdir: ".config/kitty"
+
+  - src: "~/.config/rofi/"
+    subdir: ".config/rofi"
+
+  - src: "~/bin/notifytrans"
+    subdir: "bin"
+
+  - src: "~/bin/conf"
+    subdir: "bin"
+
+  - src: "~/bin/definer"
+    subdir: "bin"
+
+  - src: "~/bin/change-wallpaper"
+    subdir: "bin"
+
