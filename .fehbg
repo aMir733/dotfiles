@@ -1,2 +1,2 @@
 #!/bin/sh
-feh --no-fehbg --bg-scale /home/amir/Pictures/wallpapers/wallhaven-kw783d_1920x1080.png 
+feh --no-fehbg --bg-scale ~/Pictures/wallpapers/wallhaven-kw783d_1920x1080.png 
