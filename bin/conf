@@ -37,6 +37,10 @@ case $1 in
 		nvim $HOME/.config/dunst/dunstrc -c 'set filetype=cfg'
 		exit
 		;;
+	prof)
+		nvim $HOME/.prof
+		exit
+		;;
 	*)
 		echo "Invalid Input. Usage: conf [i3,picom,polybar]"
 		exit

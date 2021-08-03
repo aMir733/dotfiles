@@ -1,6 +1,6 @@
 source $HOME/.prof
 if [ -z "${DISPLAY}" ] && [ "${XDG_VTNR}" -eq 1 ]; then
-	exec startx
+	startx
 fi
 
 export ZSH="$HOME/.oh-my-zsh"

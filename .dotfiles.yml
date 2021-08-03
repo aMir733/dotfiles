@@ -3,7 +3,7 @@ dest: "~/.dotfiles"
 archive: "~/tmp/dotfiles.tar.gz"
 tasks:
   - src: "~/.startup.sh"
-  - src: "~/.fehbg"
+#  - src: "~/.fehbg"
   - src: "~/.prof"
   - src: "~/.zshrc"
   - src: "~/.xinitrc"
