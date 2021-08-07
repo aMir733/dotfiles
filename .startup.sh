@@ -6,7 +6,7 @@ killall -q dunst
 picom &
 
 # Configure monitors (X11)
-autorandr -c
+#autorandr -c
 
 # Run Dunst
 dunst &
