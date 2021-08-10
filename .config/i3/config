@@ -215,7 +215,7 @@ bindsym $mod+d exec --no-startup-id rofi-launcher
 bindsym $mod+Shift+f --release exec notify-send `colorpicker --short --one-shot`
 
 ## Define selected word
-bindsym $mod+Shift+d --release exec notify-send "`xsel -o`" "$(definer `xsel -o`)"
+bindsym $mod+Shift+d --release exec firefox "https://www.merriam-webster.com/dictionary/$(xsel -o)"
 
 # Window Colors
 # class                 border  bground text    indicator child_border

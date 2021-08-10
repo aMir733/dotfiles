@@ -2,6 +2,7 @@
 
 # Default Path
 export PATH=/usr/sbin:/sbin:/usr/local/bin:/usr/bin:/bin:/usr/games
+
 # Bins
 export PATH=$HOME/bin:$HOME/.local/bin:$PATH
 
@@ -15,8 +16,8 @@ export PATH=$PATH:$HOME/.cargo/bin
 export GOPATH=$HOME/.local/go
 export PATH=$PATH:$HOME/.local/go/bin
 
-# SDK
-export PATH=$PATH:/opt/sdk
+# SDK - Platform-tools 
+export PATH=$PATH:/opt/platform-tools
 
 # No GPU
 export PATH=$HOME/nogpu:$PATH
