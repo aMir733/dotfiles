@@ -22,7 +22,7 @@ bindsym XF86AudioPlay exec --no-startup-id dbus-send --print-reply --dest=org.mp
 floating_modifier $mod
 
 # start a terminal
-bindsym $mod+Return exec kitty
+bindsym $mod+Return exec x-terminal-emulator
 
 # kill focused window
 bindsym $mod+Shift+c kill
@@ -164,6 +164,12 @@ gaps inner 15
 gaps top 17
 
 # Workspace assignment
+workspace $ws1 output HDMI-1
+workspace $ws2 output HDMI-1
+workspace $ws3 output HDMI-1
+workspace $ws4 output HDMI-1
+workspace $ws5 output HDMI-1
+workspace $ws8 output HDMI-1
 workspace $ws9 output LVDS-1
 
 # App workspace assignment
@@ -175,6 +181,9 @@ for_window [class="discord"] move to workspace $ws8
 for_window [class="Spotify"] move to workspace $ws9
 
 # Other Keybindings
+
+## Switch between workplaces
+bindsym $mod+Tab workspace back_and_forth
 
 ## Launch APPs
 bindsym $mod+KP_End exec firefox
