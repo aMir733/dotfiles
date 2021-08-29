@@ -79,8 +79,7 @@ label = %date% %time%
 type = custom/script
 interval = 3
 format = [ <label> ]
-exec = python3 .config/polybar/scripts/spotify_status.py -t 60 -q -f '{artist} {play_pause} {song}' -p " 1 , 2 " --playpause-font 4 -c 
-exec-if = pgrep -x spotify
+exec = sp polybar 2>/dev/null
 
 [module/ip]
 type = custom/script

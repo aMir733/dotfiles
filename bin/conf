@@ -41,6 +41,14 @@ case $1 in
 		nvim $HOME/.prof
 		exit
 		;;
+	mpv)
+		nvim $HOME/.config/mpv/mpv.conf
+		exit
+		;;
+	mpv-input)
+		nvim $HOME/.config/mpv/input.conf
+		exit
+		;;
 	*)
 		echo "Invalid Input. Usage: conf [i3,picom,polybar]"
 		exit

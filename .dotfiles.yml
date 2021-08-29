@@ -8,6 +8,7 @@ tasks:
   - src: "~/.zshrc"
   - src: "~/.xinitrc"
   - src: "~/.dotfiles.yml"
+  - src: "~/.radare2rc"
     
   - src: "~/.config/i3/config"
     subdir: ".config/i3"
@@ -39,15 +40,32 @@ tasks:
   - src: "~/.config/rofi/"
     subdir: ".config/rofi"
 
+  - src: "~/.config/mpv/"
+    subdir: ".config/mpv"
+
   - src: "~/bin/notifytrans"
     subdir: "bin"
 
   - src: "~/bin/conf"
     subdir: "bin"
 
-  - src: "~/bin/definer"
-    subdir: "bin"
-
   - src: "~/bin/change-wallpaper"
     subdir: "bin"
 
+  - src: "~/bin/sp"
+    subdir: "bin"
+
+  - src: "~/bin/add-nordvpn.sh"
+    subdir: "bin"
+
+  - src: "~/bin/i3-get-window-criteria"
+    subdir: "bin"
+
+  - src: "~/bin/ip-sweep"
+    subdir: "bin"
+
+  - src: "~/bin/mpvcontrol.sh"
+    subdir: "bin"
+
+  - src: "~/bin/sync-dotfiles"
+    subdir: "bin"

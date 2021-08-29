@@ -33,12 +33,6 @@ bindsym $mod+k focus down
 bindsym $mod+l focus up
 bindsym $mod+semicolon focus right
 
-# alternatively, you can use the cursor keys:
-bindsym $mod+Left focus left
-bindsym $mod+Down focus down
-bindsym $mod+Up focus up
-bindsym $mod+Right focus right
-
 # move focused window
 bindsym $mod+Shift+j move left
 bindsym $mod+Shift+k move down
@@ -194,10 +188,10 @@ bindsym $mod+KP_Up exec discord
 bindsym $mod+KP_Prior exec spotify
 
 ## Network manager
-bindsym $mod+KP_Add exec nmcli c up Ac
-bindsym $mod+KP_Subtract exec nmcli c down Ac
-bindsym $mod+Shift+KP_Add exec nmcli c up `nmcli c show Ac | grep "connection.secondaries:" | awk '{ print $2 }'`
-bindsym $mod+Shift+KP_Subtract exec nmcli c down `nmcli c show Ac | grep "connection.secondaries:" | awk '{ print $2 }'`
+bindsym $mod+KP_Add exec nmcli c up "`nmcli c show | grep wifi | awk '{ print $1 }' | head -n 1`"
+bindsym $mod+KP_Subtract exec nmcli c down "`nmcli c show | grep wifi | awk '{ print $1 }' | head -n 1`"
+bindsym $mod+Shift+KP_Add exec nmcli c up `nmcli c show "\`nmcli c show | grep wifi | awk '{ print $1 }' | head -n 1\`" | grep "connection.secondaries:" | awk '{ print $2 }'`
+bindsym $mod+Shift+KP_Subtract exec nmcli c down `nmcli c show "\`nmcli c show | grep wifi | awk '{ print $1 }' | head -n 1\`" | grep "connection.secondaries:" | awk '{ print $2 }'`
 
 ## Screenshot
 bindsym Print exec --no-startup-id flameshot screen -p ~/Pictures/screenshots -c
@@ -225,6 +219,11 @@ bindsym $mod+Shift+f --release exec notify-send `colorpicker --short --one-shot`
 
 ## Define selected word
 bindsym $mod+Shift+d --release exec firefox "https://www.merriam-webster.com/dictionary/$(xsel -o)"
+
+## mpv shortcuts
+bindsym $mod+F9 exec --no-startup-id mpvcontrol.sh togpause
+bindsym $mod+Left exec --no-startup-id mpvcontrol.sh back
+bindsym $mod+Right exec --no-startup-id mpvcontrol.sh forward
 
 # Window Colors
 # class                 border  bground text    indicator child_border
