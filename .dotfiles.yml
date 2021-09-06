@@ -16,9 +16,6 @@ tasks:
   - src: "~/.config/polybar/launch.sh"
     subdir: ".config/polybar"
 
-  - src: "~/.config/polybar/scripts/spotify_status.py"
-    subdir: ".config/polybar"
-
   - src: "~/.config/polybar/config"
     subdir: ".config/polybar"
 
@@ -42,9 +39,6 @@ tasks:
 
   - src: "~/.config/mpv/"
     subdir: ".config/mpv"
-
-  - src: "~/bin/notifytrans"
-    subdir: "bin"
 
   - src: "~/bin/conf"
     subdir: "bin"
