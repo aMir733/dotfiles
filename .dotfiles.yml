@@ -63,3 +63,6 @@ tasks:
 
   - src: "~/bin/sync-dotfiles"
     subdir: "bin"
+
+  - src: "~/bin/htb"
+    subdir: "bin"

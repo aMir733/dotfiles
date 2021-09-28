@@ -16,11 +16,15 @@ export PATH=$PATH:$HOME/.cargo/bin
 export GOPATH=$HOME/.local/go
 export PATH=$PATH:$HOME/.local/go/bin
 
-# SDK - Platform-tools 
-export PATH=$PATH:/opt/platform-tools
+# SDK - Android studio - Emulator - Platform-tools
+export PATH=$PATH:$HOME/Android/Sdk/cmdline-tools/latest/bin:$HOME/Android/Sdk/cmdline-tools/tools/bin:$HOME/Android/Sdk/emulator:$HOME/Android/Sdk/tools:$HOME/Android/Sdk/tools/bin:$HOME/Android/Sdk/platform-tools
 
 # No GPU
 export PATH=$HOME/nogpu:$PATH
+
+# pyenv
+export PATH=$PATH:$HOME/.pyenv/bin
+export PATH=$PATH:$HOME/.pyenv/shims
 
 
 ## ALIASES

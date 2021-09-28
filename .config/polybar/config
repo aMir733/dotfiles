@@ -30,7 +30,7 @@ font-3 = Guifx v2 Transports:pixelsize=10
 
 modules-left = i3
 modules-center = date
-modules-right = ip spotify 
+modules-right = upgradable ip spotify 
 
 separator = "  "
 
@@ -87,6 +87,12 @@ interval = 60
 format = [ <label> ]
 #exec = ip --brief address | awk 'END{ print substr($3, 1, length($3)-3) }'
 exec = ip --brief address | awk 'END{ if (substr($3, 1, 6)=="10.10.") {print substr($3, 1, length($3)-3)} else if (substr($3, 1, 3)=="192") {print "!vpn"} else {print ""} }'
+
+[module/upgradable]
+type = custom/script
+interval = 1200
+format = [ <label> ]
+exec = PACKAGES_AVAILABLE=$(apt list --upgradable 2>/dev/null | wc -l) ; if [ $(expr $PACKAGES_AVAILABLE - 3) -gt 50 ] ; then  echo "%{T4}|%{T-} $PACKAGES_AVAILABLE" ; fi 
 
 #[module/battery]
 #type = custom/script

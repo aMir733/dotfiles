@@ -173,6 +173,9 @@ for_window [class="burp-StartBurp"] move to workspace $ws5
 for_window [class="discord"] move to workspace $ws8
 for_window [class="Spotify"] move to workspace $ws9
 
+# Always floating
+for_window [title="Android Emulator .*"] floating enable
+
 # Other Keybindings
 
 ## Switch between workplaces

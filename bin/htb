@@ -1,0 +1,124 @@
+#!/bin/bash
+
+# Check arguments
+if [[ "a$1" == "a" ]] || [[ "a$2" == "a" ]] || [[ "a$3" == "a" ]] || [[ "a$4" == "a" ]] ; then
+	echo "[-] Invalid arguments"
+	echo "$(basename $0) [Functions] [Box Name] [Box IP Address] [PI|RA]"
+	echo "Example: '$(basename $0) dce validation 10.10.11.116 PI'"
+	echo "Available functions: [(d)irectory_structure|(c)onnect_vpn|(e)dit_hosts|(l)aunch_tools]"
+	exit 1
+fi
+
+#-----Global Vars-----:
+HTB_DIR=$HOME/htb
+HTB_VPN_PI="lab_aMir733"
+HTB_VPN_RA="aMir733-release(5)"
+HTB_NAME=$2
+HTB_IP=$3
+HTB_PATH=$HTB_DIR/$HTB_NAME
+HTB_SUBDIR=(dis nmap notes/$HTB_NAME)
+HTB_TOOLS=(nmap obsidian burp)
+#-----Global Vars-----|
+
+directory_structure() {(
+	set -e
+	arr=("$@")
+	mkdir -p $HTB_PATH ; cd $HTB_PATH
+	echo "[+] Creating directory structure in $(pwd)"
+	for DIR in ${arr[@]} ; do
+		echo "[+] Creating directory $DIR"
+		mkdir -p $DIR
+	done
+	echo "[+] Directory structure done"
+)}
+
+
+connect_vpn() {
+	if [[ "$1" == "PI" ]] ; then
+		HTB_VPN=$HTB_VPN_PI
+	elif [[ "$1" == "RA" ]] ; then
+		HTB_VPN=$HTB_VPN_RA
+	else
+		echo "[-] Skipping VPN connection -> Invalid instance: Try RA for release arena or PI for public instance"
+		return 1
+	fi
+	if [[ $(nmcli -f "GENERAL.STATE" c show "$HTB_VPN" | awk '{ print $2 }') == "activated" ]] ; then
+		echo "[*] Skipping VPN connection -> Already connected to the $1 VPN $HTB_VPN"
+		return 0
+	fi
+	echo "[+] Disconnecting from the connected HTB VPN (if any)"
+	nmcli c down $HTB_VPN_PI $HTB_VPN_RA 2>/dev/null
+	echo "[+] Connecting to the VPN: $HTB_VPN"
+	nmcli c up $HTB_VPN
+}
+
+edit_hosts() {
+	# Copy to tmp and edit
+	HTB_TMP_HOSTS=$(mktemp -t hosts-XXXX)
+	cat /etc/hosts > $HTB_TMP_HOSTS
+	if [[ ! $(grep "#HTB" $HTB_TMP_HOSTS) ]] ; then
+		echo "" >> $HTB_TMP_HOSTS
+		echo "#HTB" >> $HTB_TMP_HOSTS
+	fi
+	sed  -i -e "/^#HTB$/a $HTB_IP htb $HTB_NAME.htb" -e '/^#HTB$/{n;d}' $HTB_TMP_HOSTS
+	cat $HTB_TMP_HOSTS
+	read -p "[?] move the above $HTB_TMP_HOSTS file to /etc/hosts? (Y/n) " ANSWER
+	case ${ANSWER:0:1} in
+		Y|y|"")
+			# Backup /etc/hosts
+			HTB_HOSTS_BACKUP=/tmp/hosts_$(date "+%H-%M-%S").bak
+			cp /etc/hosts $HTB_HOSTS_BACKUP
+			echo "[*] /etc/hosts is backed up in $HTB_HOSTS_BACKUP"
+			# Copy to /etc/hosts
+			echo "[*] Executing sudo Command: 'sudo mv $HTB_TMP_HOSTS /etc/hosts'"
+			sudo mv $HTB_TMP_HOSTS /etc/hosts
+			;;
+		*)
+			echo "[-] Copy canceled. File is saved in $HTB_TMP_HOSTS"
+			return 1
+			;;
+	esac
+}
+
+launch_tools() {
+	arr=("$@")
+	for TOOL in ${arr[@]} ; do
+		if [[ $(pgrep $TOOL) ]] ; then
+			echo "[!] Skipping $TOOL -> Already running"
+			continue
+		fi
+		echo "Launching $TOOL"
+		case $TOOL in
+			nmap)
+				HTB_NMAP_SCRIPT=/tmp/nmap-htb
+				echo -e '#!/bin/bash\nnmap -sC -sV -oA nmap/tcp htb -v\ncat nmap/tcp.nmap >> 'notes/$HTB_NAME/00 -- nmap.md'\nsleep 30\nnmap -sC -sV -p- -oA nmap/tcp-p htb -v\ncat nmap/tcp-p.nmap >> "notes/$HTB_NAME/00 -- nmap.md"' > $HTB_NMAP_SCRIPT
+				chmod +x $HTB_NMAP_SCRIPT
+				i3-msg "workspace 6 ; exec x-terminal-emulator -d=$HTB_PATH --hold $HTB_NMAP_SCRIPT; workspace back_and_forth" &>/dev/null && echo "$TOOL launched in workspace 6"
+				;;
+			*)
+				i3-msg "exec $TOOL" &>/dev/null && echo "$TOOL launched"
+				;;
+		esac
+	done
+}
+
+
+for (( i=0; i<${#1}; i++ )); do
+	case ${1:$i:1} in
+		d)
+			directory_structure "${HTB_SUBDIR[@]}"
+			;;
+		c)
+			connect_vpn $4
+			;;
+		e)
+			edit_hosts
+			;;
+		l)
+			launch_tools "${HTB_TOOLS[@]}"
+			;;
+		*)
+			echo "[!] No function found for character ${1:$i:1}. Available functions-> [(d)irectory_structure|(c)onnect_vpn|(e)dit_hosts|(l)aunch_tools]"
+			;;
+	esac
+done

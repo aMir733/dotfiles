@@ -2,7 +2,7 @@
 
 case $1 in
 	i3)
-		nvim $HOME/.config/i3/config
+		nvim $HOME/.config/i3/config -c 'set filetype=sh'
 		exit
 		;;
 	picom)
@@ -47,6 +47,10 @@ case $1 in
 		;;
 	mpv-input)
 		nvim $HOME/.config/mpv/input.conf
+		exit
+		;;
+	zsh)
+		nvim $HOME/.zshrc
 		exit
 		;;
 	*)
