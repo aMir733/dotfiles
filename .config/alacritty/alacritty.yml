@@ -1,0 +1,32 @@
+window:
+        padding:
+                x: 3
+                y: 2
+
+font:
+        normal:
+                family: 'JetBrains Mono'
+                style: 'Medium'
+        bold:
+                family: 'JetBrains Mono'
+                style: 'Bold'
+        italic:
+                family: 'JetBrains Mono'
+                style: 'Italic'
+        bold_italic:
+                family: 'JetBrains Mono'
+                style: 'Bold Italic'
+
+        size: 10
+
+colors:
+        primary:
+                background: '#09090b'
+                foreground: '#e1eaea'
+
+shell:
+        program: '/bin/zsh'
+        args:
+                - '-l'
+                - '-c'
+                - "tmux"

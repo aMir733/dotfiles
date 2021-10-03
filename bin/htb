@@ -1,36 +1,42 @@
 #!/bin/bash
 
-# Check arguments
-if [[ "a$1" == "a" ]] || [[ "a$2" == "a" ]] || [[ "a$3" == "a" ]] || [[ "a$4" == "a" ]] ; then
-	echo "[-] Invalid arguments"
-	echo "$(basename $0) [Functions] [Box Name] [Box IP Address] [PI|RA]"
-	echo "Example: '$(basename $0) dce validation 10.10.11.116 PI'"
-	echo "Available functions: [(d)irectory_structure|(c)onnect_vpn|(e)dit_hosts|(l)aunch_tools]"
-	exit 1
-fi
-
-#-----Global Vars-----:
-HTB_DIR=$HOME/htb
+#----Default Values----:
+HTB_NAME=""
+HTB_IP=""
+HTB_VPN_MODE="PI"
 HTB_VPN_PI="lab_aMir733"
 HTB_VPN_RA="aMir733-release(5)"
-HTB_NAME=$2
-HTB_IP=$3
-HTB_PATH=$HTB_DIR/$HTB_NAME
-HTB_SUBDIR=(dis nmap notes/$HTB_NAME)
+HTB_DIR=$HOME/htb
+HTB_PATH='$HTB_DIR/$HTB_NAME'
+HTB_SUBDIR=(dis nmap 'notes/$HTB_NAME')
 HTB_TOOLS=(nmap obsidian burp)
-#-----Global Vars-----|
+HTB_TMUX_SESS_NAME='htb_$HTB_NAME'
+HTB_TMUX_NMAP_WIN_NAME=scans
+HTB_TMUX_WINDOWS=(main shell scan other)
+HTB_FUNC_D=false
+HTB_FUNC_C=false
+HTB_FUNC_E=false
+HTB_FUNC_L=false
+HTB_FUNC_T=false
+#----Default Values----|
 
-directory_structure() {(
-	set -e
-	arr=("$@")
+usage() {
+	printf "Example usage: \n\$ $(basename $0) -n validation -a 10.10.11.116 -d \"nmap notes dis\" -c PI -e -l \"burp nmap\" -t \"main ${HTB_TMUX_NMAP_WIN_NAME} others\"\n\nFlags:\n\t-n \t Name of the box\n\t-a \t IP address of the box\n\t-d \t Directories to create (Calling it without argument will only create the main directory)\n\t-c \t Connect to the vpn [RA|PI] (RA:release arena|PI:public instance)\n\t-e \t Edit /etc/hosts based on the name and IP address\n\t-l \t Launch tools\n\t-t \t Tmux windows to create (Calling it without argument will only create the session)\n\t-h \t Print this help message\n"
+	if [[ "a$1" != "a" ]] ; then exit $1 ; fi
+}
+
+
+directory_structure() {
+	ARR=($@)
 	mkdir -p $HTB_PATH ; cd $HTB_PATH
 	echo "[+] Creating directory structure in $(pwd)"
-	for DIR in ${arr[@]} ; do
+	for DIR in ${ARR[@]} ; do
+		eval "DIR=\"$DIR\""
 		echo "[+] Creating directory $DIR"
 		mkdir -p $DIR
 	done
 	echo "[+] Directory structure done"
-)}
+}
 
 
 connect_vpn() {
@@ -56,11 +62,13 @@ edit_hosts() {
 	# Copy to tmp and edit
 	HTB_TMP_HOSTS=$(mktemp -t hosts-XXXX)
 	cat /etc/hosts > $HTB_TMP_HOSTS
+	echo "[+] Copying /etc/hosts to $HTB_TMP_HOSTS to edit"
 	if [[ ! $(grep "#HTB" $HTB_TMP_HOSTS) ]] ; then
 		echo "" >> $HTB_TMP_HOSTS
 		echo "#HTB" >> $HTB_TMP_HOSTS
 	fi
 	sed  -i -e "/^#HTB$/a $HTB_IP htb $HTB_NAME.htb" -e '/^#HTB$/{n;d}' $HTB_TMP_HOSTS
+	echo "[+] Outputing the contents of $HTB_TMP_HOSTS to the screen"
 	cat $HTB_TMP_HOSTS
 	read -p "[?] move the above $HTB_TMP_HOSTS file to /etc/hosts? (Y/n) " ANSWER
 	case ${ANSWER:0:1} in
@@ -68,57 +76,95 @@ edit_hosts() {
 			# Backup /etc/hosts
 			HTB_HOSTS_BACKUP=/tmp/hosts_$(date "+%H-%M-%S").bak
 			cp /etc/hosts $HTB_HOSTS_BACKUP
-			echo "[*] /etc/hosts is backed up in $HTB_HOSTS_BACKUP"
+			echo "[+] /etc/hosts is backed up in $HTB_HOSTS_BACKUP"
 			# Copy to /etc/hosts
 			echo "[*] Executing sudo Command: 'sudo mv $HTB_TMP_HOSTS /etc/hosts'"
 			sudo mv $HTB_TMP_HOSTS /etc/hosts
 			;;
 		*)
-			echo "[-] Copy canceled. File is saved in $HTB_TMP_HOSTS"
+			echo "[-] Copy canceled. /etc/hosts untouched. File is saved in $HTB_TMP_HOSTS"
 			return 1
 			;;
 	esac
 }
 
 launch_tools() {
-	arr=("$@")
-	for TOOL in ${arr[@]} ; do
-		if [[ $(pgrep $TOOL) ]] ; then
+	ARR=($@)
+	for TOOL in ${ARR[@]} ; do
+		eval "TOOL=\"$TOOL\""
+		if pgrep "$TOOL" ; then
 			echo "[!] Skipping $TOOL -> Already running"
 			continue
 		fi
-		echo "Launching $TOOL"
+		echo "[+] Launching $TOOL"
 		case $TOOL in
 			nmap)
-				HTB_NMAP_SCRIPT=/tmp/nmap-htb
-				echo -e '#!/bin/bash\nnmap -sC -sV -oA nmap/tcp htb -v\ncat nmap/tcp.nmap >> 'notes/$HTB_NAME/00 -- nmap.md'\nsleep 30\nnmap -sC -sV -p- -oA nmap/tcp-p htb -v\ncat nmap/tcp-p.nmap >> "notes/$HTB_NAME/00 -- nmap.md"' > $HTB_NMAP_SCRIPT
-				chmod +x $HTB_NMAP_SCRIPT
-				i3-msg "workspace 6 ; exec x-terminal-emulator -d=$HTB_PATH --hold $HTB_NMAP_SCRIPT; workspace back_and_forth" &>/dev/null && echo "$TOOL launched in workspace 6"
+				HTB_NMAP_COMMAND="nmap -v -sC -sV -oA nmap/tcp ${HTB_IP} ; sleep 30 ; nmap -v -sC -sV -p- -oA nmap/tcp-p ${HTB_IP} ; exec \$SHELL"
+				if ! tmux has-session -t="${HTB_TMUX_SESS_NAME}" &>/dev/null ; then
+					echo "[+] Creating tmux session"
+					tmux new-session -c "$HTB_PATH" -s "$HTB_TMUX_SESS_NAME" -n "${HTB_TMUX_NMAP_WIN_NAME}" -d "$HTB_NMAP_COMMAND" &>/dev/null
+				elif ! tmux has-session -t="${HTB_TMUX_SESS_NAME}:${HTB_TMUX_NMAP_WIN_NAME}" &>/dev/null ; then
+					echo "[+] Tmux session already running. Creating ${HTB_TMUX_NMAP_WIN_NAME} window"
+					tmux new-window -c "$HTB_PATH" -t "${HTB_TMUX_SESS_NAME}:" -n "${HTB_TMUX_NMAP_WIN_NAME}" -d "$HTB_NMAP_COMMAND" &>/dev/null
+				else
+					echo "[+] Tmux session and window already running. Creating a pane" 
+					tmux split-window -c "$HTB_PATH" -t "${HTB_TMUX_SESS_NAME}:${HTB_TMUX_NMAP_WIN_NAME}" -d "$HTB_NMAP_COMMAND" &>/dev/null
+				fi && echo "[+] nmap running in the tmux session "${HTB_TMUX_SESS_NAME}" inside the "${HTB_TMUX_NMAP_WIN_NAME}" window"
 				;;
 			*)
 				i3-msg "exec $TOOL" &>/dev/null && echo "$TOOL launched"
 				;;
 		esac
 	done
+} 
+tmux_run() {
+	ARR=($@)
+	if ! tmux new-session -s "$HTB_TMUX_SESS_NAME" -n "${ARR[0]}" -d &>/dev/null ; then
+		echo "[*] Tmux session named $HTB_TMUX_SESS_NAME already running"
+	else
+		echo "[+] Tmux session named $HTB_TMUX_SESS_NAME created"
+	fi
+	for WINDOW_NAME in ${ARR[@]} ; do
+		eval "WINDOW_NAME=\"$WINDOW_NAME\""
+		if tmux list-windows -t "$HTB_TMUX_SESS_NAME" -F "#{==:#{window_name},${WINDOW_NAME}}" | grep 1 &>/dev/null ; then
+			continue
+		else
+			tmux new-window -c "$HTB_PATH" -n "$WINDOW_NAME" -t "${HTB_TMUX_SESS_NAME}:" -d
+		fi
+	done
 }
 
+# Parse arguments
+while getopts 'n:a:d:c:el:t:h' flag 2>/dev/null ; do
+	case "${flag}" in
+		n) HTB_NAME=${OPTARG} ;;
+		a) HTB_IP=${OPTARG} ;;
+		d) HTB_FUNC_D=true ; IFS=' ' read -a HTB_SUBDIR <<< "${OPTARG}" ;;
+		c) HTB_FUNC_C=true HTB_VPN_MODE="${OPTARG}" ;;
+		e) HTB_FUNC_E=true ;;
+		l) HTB_FUNC_L=true ; IFS=' ' read -a HTB_TOOLS <<< "${OPTARG}" ;;
+		t) HTB_FUNC_T=true ; IFS=' ' read -a HTB_TMUX_WINDOWS <<< "${OPTARG}" ;;
+		h) usage 0 ;;
+		*) eval echo "[-] Invalid option" ; usage 1 ;;
+	esac || usage 1
+done
 
-for (( i=0; i<${#1}; i++ )); do
-	case ${1:$i:1} in
-		d)
-			directory_structure "${HTB_SUBDIR[@]}"
-			;;
-		c)
-			connect_vpn $4
-			;;
-		e)
-			edit_hosts
-			;;
-		l)
-			launch_tools "${HTB_TOOLS[@]}"
-			;;
-		*)
-			echo "[!] No function found for character ${1:$i:1}. Available functions-> [(d)irectory_structure|(c)onnect_vpn|(e)dit_hosts|(l)aunch_tools]"
-			;;
+if [[ "a${HTB_NAME}" == "a" ]] || [[ "a${HTB_IP}" == "a" ]] ; then
+	usage 1
+fi
+
+# Reloading the variables that depend on other variables
+eval "HTB_PATH=\"$HTB_PATH\""
+eval "HTB_TMUX_SESS_NAME=\"$HTB_TMUX_SESS_NAME\""
+
+while true; do
+	case true in
+		$HTB_FUNC_D) HTB_FUNC_D=false ; directory_structure "${HTB_SUBDIR[@]}" ;;
+		$HTB_FUNC_T) HTB_FUNC_T=false ; tmux_run "${HTB_TMUX_WINDOWS[@]}" ;;
+		$HTB_FUNC_C) HTB_FUNC_C=false ; connect_vpn "${HTB_VPN_MODE}" ;;
+		$HTB_FUNC_E) HTB_FUNC_E=false ; edit_hosts ;;
+		$HTB_FUNC_L) HTB_FUNC_L=false ; launch_tools "${HTB_TOOLS[@]}" ;;
+		*) break ;;
 	esac
 done
+

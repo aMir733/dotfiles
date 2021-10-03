@@ -53,6 +53,10 @@ case $1 in
 		nvim $HOME/.zshrc
 		exit
 		;;
+	tmux)
+		nvim $HOME/.tmux.conf
+		exit
+		;;
 	*)
 		echo "Invalid Input. Usage: conf [i3,picom,polybar]"
 		exit

@@ -9,6 +9,7 @@ tasks:
   - src: "~/.xinitrc"
   - src: "~/.dotfiles.yml"
   - src: "~/.radare2rc"
+  - src: "~/.tmux.conf"
     
   - src: "~/.config/i3/config"
     subdir: ".config/i3"
@@ -33,6 +34,9 @@ tasks:
 
   - src: "~/.config/kitty/kitty.conf"
     subdir: ".config/kitty"
+
+  - src: "~/.config/alacritty/alacritty.yml"
+    subdir: ".config/alacritty"
 
   - src: "~/.config/rofi/"
     subdir: ".config/rofi"
