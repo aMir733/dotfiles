@@ -11,6 +11,9 @@ tasks:
   - src: "~/.radare2rc"
   - src: "~/.tmux.conf"
     
+  - src: "~/.config/nvim/init.vim"
+    subdir: ".config/nvim"
+
   - src: "~/.config/i3/config"
     subdir: ".config/i3"
 
