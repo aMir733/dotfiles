@@ -5,7 +5,7 @@ HTB_NAME=""
 HTB_IP=""
 HTB_VPN_MODE="PI"
 HTB_VPN_PI="lab_aMir733"
-HTB_VPN_RA="aMir733-release(5)"
+HTB_VPN_RA="aMir733-release(6)"
 HTB_DIR=$HOME/htb
 HTB_PATH='$HTB_DIR/$HTB_NAME'
 HTB_SUBDIR=(dis nmap 'notes/$HTB_NAME')
@@ -25,14 +25,29 @@ usage() {
 	if [[ "a$1" != "a" ]] ; then exit $1 ; fi
 }
 
+test_connection() {
+	if [[ "a$1" != "a" ]] ; then
+		HTB_PING_TIMEOUT=$1
+	else
+		HTB_PING_TIMEOUT=6
+	fi
+	echo "[.] Testing connection to $HTB_IP using ping with timeout set to $HTB_PING_TIMEOUT"
+	if ping -c 1 -W $HTB_PING_TIMEOUT "$HTB_IP" &>/dev/null ; then
+		echo "[+] Ping successful"
+		return 0
+	else
+		echo "[-] Ping failed"
+		return 1
+	fi
+}
 
 directory_structure() {
 	ARR=($@)
 	mkdir -p $HTB_PATH ; cd $HTB_PATH
-	echo "[+] Creating directory structure in $(pwd)"
+	echo "[.] Creating directory structure in $(pwd)"
 	for DIR in ${ARR[@]} ; do
 		eval "DIR=\"$DIR\""
-		echo "[+] Creating directory $DIR"
+		echo "[.] Creating directory $DIR"
 		mkdir -p $DIR
 	done
 	echo "[+] Directory structure done"
@@ -52,23 +67,24 @@ connect_vpn() {
 		echo "[*] Skipping VPN connection -> Already connected to the $1 VPN $HTB_VPN"
 		return 0
 	fi
-	echo "[+] Disconnecting from the connected HTB VPN (if any)"
-	nmcli c down $HTB_VPN_PI $HTB_VPN_RA 2>/dev/null
-	echo "[+] Connecting to the VPN: $HTB_VPN"
-	nmcli c up $HTB_VPN
+	echo "[.] Disconnecting from the connected HTB VPN (if any)"
+	nmcli c down "$HTB_VPN_PI" "$HTB_VPN_RA" &>/dev/null
+	echo "[.] Connecting to the VPN: $HTB_VPN"
+	nmcli c up "$HTB_VPN" &>/dev/null || (echo "[-] VPN connection failed" ; return 1)
+	echo "[+] Connected to VPN: $HTB_VPN"
 }
 
 edit_hosts() {
 	# Copy to tmp and edit
 	HTB_TMP_HOSTS=$(mktemp -t hosts-XXXX)
 	cat /etc/hosts > $HTB_TMP_HOSTS
-	echo "[+] Copying /etc/hosts to $HTB_TMP_HOSTS to edit"
+	echo "[.] Copying /etc/hosts to $HTB_TMP_HOSTS to edit"
 	if [[ ! $(grep "#HTB" $HTB_TMP_HOSTS) ]] ; then
 		echo "" >> $HTB_TMP_HOSTS
 		echo "#HTB" >> $HTB_TMP_HOSTS
 	fi
 	sed  -i -e "/^#HTB$/a $HTB_IP htb $HTB_NAME.htb" -e '/^#HTB$/{n;d}' $HTB_TMP_HOSTS
-	echo "[+] Outputing the contents of $HTB_TMP_HOSTS to the screen"
+	echo "[.] Outputing the contents of $HTB_TMP_HOSTS to the screen"
 	cat $HTB_TMP_HOSTS
 	read -p "[?] move the above $HTB_TMP_HOSTS file to /etc/hosts? (Y/n) " ANSWER
 	case ${ANSWER:0:1} in
@@ -79,7 +95,7 @@ edit_hosts() {
 			echo "[+] /etc/hosts is backed up in $HTB_HOSTS_BACKUP"
 			# Copy to /etc/hosts
 			echo "[*] Executing sudo Command: 'sudo mv $HTB_TMP_HOSTS /etc/hosts'"
-			sudo mv $HTB_TMP_HOSTS /etc/hosts
+			sudo mv $HTB_TMP_HOSTS /etc/hosts && echo "[+] Modified /etc/hosts successfully"
 			;;
 		*)
 			echo "[-] Copy canceled. /etc/hosts untouched. File is saved in $HTB_TMP_HOSTS"
@@ -96,30 +112,34 @@ launch_tools() {
 			echo "[!] Skipping $TOOL -> Already running"
 			continue
 		fi
-		echo "[+] Launching $TOOL"
+		echo "[.] Launching $TOOL"
 		case $TOOL in
 			nmap)
-				HTB_NMAP_COMMAND="nmap -v -sC -sV -oA nmap/tcp ${HTB_IP} ; sleep 30 ; nmap -v -sC -sV -p- -oA nmap/tcp-p ${HTB_IP} ; exec \$SHELL"
+				if ! test_connection ; then
+					echo "[-] Skipping $TOOL"
+					continue
+				fi
+				HTB_NMAP_COMMAND="mkdir -p nmap ; nmap -v -sC -sV -oA nmap/tcp ${HTB_IP} ; sleep 30 ; nmap -v -sC -sV -p- -oA nmap/tcp-p ${HTB_IP} ; exec \$SHELL"
 				if ! tmux has-session -t="${HTB_TMUX_SESS_NAME}" &>/dev/null ; then
-					echo "[+] Creating tmux session"
+					echo "[.] Creating tmux session"
 					tmux new-session -c "$HTB_PATH" -s "$HTB_TMUX_SESS_NAME" -n "${HTB_TMUX_NMAP_WIN_NAME}" -d "$HTB_NMAP_COMMAND" &>/dev/null
 				elif ! tmux has-session -t="${HTB_TMUX_SESS_NAME}:${HTB_TMUX_NMAP_WIN_NAME}" &>/dev/null ; then
-					echo "[+] Tmux session already running. Creating ${HTB_TMUX_NMAP_WIN_NAME} window"
+					echo "[.] Tmux session already running. Creating ${HTB_TMUX_NMAP_WIN_NAME} window"
 					tmux new-window -c "$HTB_PATH" -t "${HTB_TMUX_SESS_NAME}:" -n "${HTB_TMUX_NMAP_WIN_NAME}" -d "$HTB_NMAP_COMMAND" &>/dev/null
 				else
-					echo "[+] Tmux session and window already running. Creating a pane" 
+					echo "[.] Tmux session and window already running. Creating a pane" 
 					tmux split-window -c "$HTB_PATH" -t "${HTB_TMUX_SESS_NAME}:${HTB_TMUX_NMAP_WIN_NAME}" -d "$HTB_NMAP_COMMAND" &>/dev/null
-				fi && echo "[+] nmap running in the tmux session "${HTB_TMUX_SESS_NAME}" inside the "${HTB_TMUX_NMAP_WIN_NAME}" window"
+				fi && echo "[+] nmap launched in tmux session "${HTB_TMUX_SESS_NAME}" inside the "${HTB_TMUX_NMAP_WIN_NAME}" window"
 				;;
 			*)
-				i3-msg "exec $TOOL" &>/dev/null && echo "$TOOL launched"
+				i3-msg "exec $TOOL" &>/dev/null && echo "[+] $TOOL launched"
 				;;
 		esac
 	done
 } 
 tmux_run() {
 	ARR=($@)
-	if ! tmux new-session -s "$HTB_TMUX_SESS_NAME" -n "${ARR[0]}" -d &>/dev/null ; then
+	if ! tmux new-session -c "$HTB_PATH" -s "$HTB_TMUX_SESS_NAME" -n "${ARR[0]}" -d &>/dev/null ; then
 		echo "[*] Tmux session named $HTB_TMUX_SESS_NAME already running"
 	else
 		echo "[+] Tmux session named $HTB_TMUX_SESS_NAME created"

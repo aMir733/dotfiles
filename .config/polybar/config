@@ -92,7 +92,7 @@ exec = ip --brief address | awk 'END{ if (substr($3, 1, 6)=="10.10.") {print sub
 type = custom/script
 interval = 1200
 format = [ <label> ]
-exec = PACKAGES_AVAILABLE=$(apt list --upgradable 2>/dev/null | wc -l) ; if [ $(expr $PACKAGES_AVAILABLE - 3) -gt 50 ] ; then  echo "%{T4}|%{T-} $PACKAGES_AVAILABLE" ; fi 
+exec = PACKAGES_AVAILABLE=$(apt list --upgradable 2>/dev/null | wc -l) ; if [ $(expr $PACKAGES_AVAILABLE - 3) -gt 10 ] ; then  echo "%{T4}|%{T-} $PACKAGES_AVAILABLE" ; fi 
 
 #[module/battery]
 #type = custom/script

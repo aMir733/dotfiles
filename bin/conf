@@ -1,64 +1,21 @@
 #!/bin/bash
 
+CONFIG_PATH=$HOME/.config
 case $1 in
-	i3)
-		nvim $HOME/.config/i3/config -c 'set filetype=sh'
-		exit
-		;;
-	picom)
-		nvim $HOME/.config/picom/picom.conf
-		exit
-		;;
-	polybar)
-		nvim $HOME/.config/polybar/config -c 'set filetype=dosini'
-		exit
-		;;
-	kitty)
-		nvim $HOME/.config/kitty/kitty.conf
-		exit
-		;;
-	nvim)
-		nvim $HOME/.config/nvim/init.vim
-		exit
-		;;
-	startup)
-		nvim $HOME/.startup.sh
-		exit
-		;;
-	rofi)
-		nvim $HOME/.config/rofi/config.rasi
-		exit
-		;;
-	conf)
-		nvim $HOME/bin/conf
-		exit
-		;;
-	dunst)
-		nvim $HOME/.config/dunst/dunstrc -c 'set filetype=cfg'
-		exit
-		;;
-	prof)
-		nvim $HOME/.prof
-		exit
-		;;
-	mpv)
-		nvim $HOME/.config/mpv/mpv.conf
-		exit
-		;;
-	mpv-input)
-		nvim $HOME/.config/mpv/input.conf
-		exit
-		;;
-	zsh)
-		nvim $HOME/.zshrc
-		exit
-		;;
-	tmux)
-		nvim $HOME/.tmux.conf
-		exit
-		;;
-	*)
-		echo "Invalid Input. Usage: conf [i3,picom,polybar]"
-		exit
-		;;
+	i3) nvim $CONFIG_PATH/i3/config -c 'set filetype=sh' ;;
+	picom) nvim $CONFIG_PATH/picom/picom.conf ;;
+	polybar) nvim $CONFIG_PATH/polybar/config -c 'set filetype=dosini' ;;
+	kitty) nvim $CONFIG_PATH/kitty/kitty.conf ;;
+	nvim) nvim $CONFIG_PATH/nvim/init.vim ;;
+	startup) nvim $HOME/.startup.sh ;;
+	rofi) nvim $CONFIG_PATH/rofi/config.rasi ;;
+	conf) nvim $HOME/bin/conf ;;
+	dunst) nvim $CONFIG_PATH/dunst/dunstrc -c 'set filetype=cfg' ;;
+	prof) nvim $HOME/.prof ;;
+	mpv) nvim $CONFIG_PATH/mpv/mpv.conf ;;
+	mpv-input) nvim $CONFIG_PATH/mpv/input.conf ;;
+	zsh) nvim $HOME/.zshrc ;;
+	tmux) nvim $HOME/.tmux.conf ;;
+	alacritty) nvim $CONFIG_PATH/alacritty/alacritty.yml ;;
+	*) echo "Invalid Input. Usage: conf [i3,picom,polybar]" ; exit 1 ;;
 esac
