@@ -1,0 +1,10 @@
+#!/bin/bash
+if swaymsg -t get_tree | grep '"height": 666' &>/dev/null ; then
+    busctl call --user sm.puri.OSK0 /sm/puri/OSK0 sm.puri.OSK0 SetVisible b false 
+    killall squeekboard &>/dev/null
+else 
+    killall squeekboard &>/dev/null
+    swaymsg exec squeekboard
+    sleep 0.1
+    busctl call --user sm.puri.OSK0 /sm/puri/OSK0 sm.puri.OSK0 SetVisible b true
+fi

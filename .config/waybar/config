@@ -1,0 +1,74 @@
+{
+    "position": "top",
+    "height": 30,
+    "spacing": 4,
+    "modules-left": ["custom/launcher", "custom/separator", "sway/workspaces", "sway/mode", "custom/media"],
+    "modules-center": ["clock"],
+    "modules-right": ["custom/separator", "cpu", "custom/separator", "temperature", "custom/separator", "sway/language", "tray", "custom/separator", "custom/powermenu"],
+
+    "sway/workspaces": {
+        "format": "{icon}",
+        "disable-scroll": true,
+        "format-icons": {
+            "1": "",
+            "2": "",
+            "3": "3",
+            "4": "4",
+            "5": "5",
+            "6": "6",
+            "7": "7",
+            "8": "",
+            "9": "",
+            "10": "",
+            "urgent": "",
+            "focused": "",
+            "default": ""
+        }
+    },
+    "sway/mode": {
+        "format": "<span style=\"italic\">{}</span>"
+    },
+    "tray": {
+        // "icon-size": 21,
+        "spacing": 10
+    },
+    "clock": {
+        "tooltip-format": "<big>{:%Y %B}</big>\n<tt><small>{calendar}</small></tt>",
+        "format": "{:<b>%e %b</b>  |  <b>%H:%M</b>}",
+    },
+    "cpu": {
+        "format": "{usage}% ",
+        "tooltip": false
+    },
+    "temperature": {
+        // "thermal-zone": 2,
+        "hwmon-path": "/sys/class/hwmon/hwmon2/temp1_input",
+        "critical-threshold": 80,
+        // "format-critical": "{temperatureC}°C {icon}",
+        "format": "{temperatureC}°C {icon}",
+        "format-icons": ["", "", ""]
+    },
+    "sway/language": {
+        "format": "{} ",
+        "tooltip": false,
+        "on-click": "keyboard-toggle"
+    },
+    "custom/launcher":{
+        "format": "",
+        "on-click": "pgrep wofi && killall wofi || wofi --show drun"
+    },
+    "custom/keyboard":{
+        "format": "",
+        "on-click": "keyboard-toggle"
+    },
+    "custom/powermenu":{
+        "format": "",
+        "on-click": "pgrep wofi && killall wofi || powermenu"
+    },
+    "custom/separator": {
+    "format": "|",
+    "interval": "once",
+    "tooltip": false
+    }
+}
+

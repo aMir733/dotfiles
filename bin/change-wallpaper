@@ -1,6 +1,0 @@
-#!/bin/bash
-cat > $HOME/.fehbg << EOF
-#!/bin/sh
-feh --no-fehbg --bg-scale $(readlink -f "$1") 
-EOF
-$HOME/.fehbg

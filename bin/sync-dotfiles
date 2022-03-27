@@ -1,7 +1,0 @@
-cd $HOME
-rm -rf .dotfiles
-git clone https://github.com/aMir733/dotfiles .dotfiles
-dotfiles
-cd .dotfiles
-git add -A
-git status

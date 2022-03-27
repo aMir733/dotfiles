@@ -1,8 +1,6 @@
-source $HOME/.prof
-if [ -z "${DISPLAY}" ] && [ "${XDG_VTNR}" -eq 1 ]; then
-	startx
-fi
+#source $HOME/.prof
 
+source $HOME/.profile
 export ZSH="$HOME/.oh-my-zsh"
 
 plugins=(zsh-autosuggestions)

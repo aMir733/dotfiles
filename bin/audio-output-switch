@@ -1,0 +1,11 @@
+#/bin/bash -e
+
+headphone="alsa_output.usb-Sony_Interactive_Entertainment_Wireless_Stereo_Headset-00.iec958-stereo"
+buds="bluez_sink.A8_87_B3_01_80_07.a2dp_sink"
+hdmi="alsa_output.pci-0000_00.1.hdmi-stereo"
+case $1 in
+    headphone) pacmd set-default-sink $headphone ;;
+    buds) pacmd set-default-sink $buds ;;
+    hdmi) pacmd set-default-sink $hdmi ;;
+    *) pacmd set-default-sink `pacmd list-sinks | grep index | tee /dev/stdout | grep -m1 -A1 "* index" | tail -1 | cut -c12-` ;;
+esac

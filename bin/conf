@@ -3,7 +3,11 @@
 CONFIG_PATH=$HOME/.config
 case $1 in
 	i3) nvim $CONFIG_PATH/i3/config -c 'set filetype=sh' ;;
-	picom) nvim $CONFIG_PATH/picom/picom.conf ;;
+	sway) nvim $CONFIG_PATH/sway/config -c 'set filetype=sh' ;;
+        mako) nvim $CONFIG_PATH/mako/config ;;
+        waybar) nvim $CONFIG_PATH/waybar/config -c 'set filetype=json' ;;
+        waybar-style) nvim $CONFIG_PATH/waybar/style.css ;;
+        picom) nvim $CONFIG_PATH/picom/picom.conf ;;
 	polybar) nvim $CONFIG_PATH/polybar/config -c 'set filetype=dosini' ;;
 	kitty) nvim $CONFIG_PATH/kitty/kitty.conf ;;
 	nvim) nvim $CONFIG_PATH/nvim/init.vim ;;

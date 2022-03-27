@@ -1,0 +1,386 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<gamecontroller configversion="19" appversion="3.2.2">
+    <!--The SDL name for a joystick is included for informational purposes only.-->
+    <sdlname>Xbox One Wireless Controller</sdlname>
+    <!--The Unique ID for a joystick is included for informational purposes only.-->
+    <uniqueID>050000005e040000e0020000030900001118736</uniqueID>
+    <stickAxisAssociation index="2" xAxis="3" yAxis="4"/>
+    <stickAxisAssociation index="1" xAxis="1" yAxis="2"/>
+    <vdpadButtonAssociations index="1">
+        <vdpadButtonAssociation axis="0" button="12" direction="1"/>
+        <vdpadButtonAssociation axis="0" button="13" direction="4"/>
+        <vdpadButtonAssociation axis="0" button="14" direction="8"/>
+        <vdpadButtonAssociation axis="0" button="15" direction="2"/>
+    </vdpadButtonAssociations>
+    <names>
+        <controlstickname index="2">Stick 2</controlstickname>
+        <controlstickname index="1">Stick 1</controlstickname>
+    </names>
+    <sets>
+        <set index="4">
+            <trigger index="6">
+                <center_value>0</center_value>
+                <min_value>-32767</min_value>
+                <max_value>32767</max_value>
+                <throttle>positivehalf</throttle>
+            </trigger>
+            <trigger index="5">
+                <center_value>0</center_value>
+                <min_value>-32767</min_value>
+                <max_value>32767</max_value>
+                <throttle>positivehalf</throttle>
+            </trigger>
+            <button index="1">
+                <setselect>5</setselect>
+                <setselectcondition>while-held</setselectcondition>
+            </button>
+            <button index="8">
+                <setselect>1</setselect>
+                <setselectcondition>while-held</setselectcondition>
+            </button>
+        </set>
+        <set index="3">
+            <trigger index="6">
+                <center_value>0</center_value>
+                <min_value>-32767</min_value>
+                <max_value>32767</max_value>
+                <throttle>positivehalf</throttle>
+            </trigger>
+            <trigger index="5">
+                <center_value>0</center_value>
+                <min_value>-32767</min_value>
+                <max_value>32767</max_value>
+                <throttle>positivehalf</throttle>
+            </trigger>
+            <button index="6">
+                <cycleresetinterval>1000</cycleresetinterval>
+                <slots>
+                    <slot>
+                        <code>10</code>
+                        <mode>release</mode>
+                    </slot>
+                    <slot>
+                        <code>0</code>
+                        <mode>pause</mode>
+                    </slot>
+                    <slot>
+                        <code>490</code>
+                        <mode>release</mode>
+                    </slot>
+                    <slot>
+                        <code>1</code>
+                        <mode>cycle</mode>
+                    </slot>
+                    <slot>
+                        <code>10</code>
+                        <mode>release</mode>
+                    </slot>
+                    <slot>
+                        <code>0</code>
+                        <mode>setchange</mode>
+                    </slot>
+                    <slot>
+                        <path>/bin/bash</path>
+                        <arguments>-c &quot;notify-send -t 5000 'Set 1'&quot;</arguments>
+                        <mode>execute</mode>
+                    </slot>
+                </slots>
+            </button>
+        </set>
+        <set index="2">
+            <trigger index="6">
+                <center_value>0</center_value>
+                <min_value>-32767</min_value>
+                <max_value>32767</max_value>
+                <throttle>positivehalf</throttle>
+            </trigger>
+            <trigger index="5">
+                <center_value>0</center_value>
+                <min_value>-32767</min_value>
+                <max_value>32767</max_value>
+                <throttle>positivehalf</throttle>
+            </trigger>
+            <button index="5">
+                <slots>
+                    <slot>
+                        <code>0x1000022</code>
+                        <mode>keyboard</mode>
+                    </slot>
+                    <slot>
+                        <code>0x1000020</code>
+                        <mode>keyboard</mode>
+                    </slot>
+                    <slot>
+                        <code>0x43</code>
+                        <mode>keyboard</mode>
+                    </slot>
+                </slots>
+            </button>
+            <button index="11">
+                <slots>
+                    <slot>
+                        <code>0x1000022</code>
+                        <mode>keyboard</mode>
+                    </slot>
+                    <slot>
+                        <code>0x1000020</code>
+                        <mode>keyboard</mode>
+                    </slot>
+                    <slot>
+                        <code>0x100003b</code>
+                        <mode>keyboard</mode>
+                    </slot>
+                </slots>
+            </button>
+            <button index="10">
+                <slots>
+                    <slot>
+                        <code>0x1000022</code>
+                        <mode>keyboard</mode>
+                    </slot>
+                    <slot>
+                        <code>0x1000020</code>
+                        <mode>keyboard</mode>
+                    </slot>
+                    <slot>
+                        <code>0x100003a</code>
+                        <mode>keyboard</mode>
+                    </slot>
+                </slots>
+            </button>
+            <button index="9">
+                <setselect>1</setselect>
+                <setselectcondition>while-held</setselectcondition>
+            </button>
+        </set>
+        <set index="1">
+            <stick index="2">
+                <calibrated>false</calibrated>
+                <summary></summary>
+                <stickbutton index="3">
+                    <slots>
+                        <slot>
+                            <code>4</code>
+                            <mode>mousemovement</mode>
+                        </slot>
+                    </slots>
+                </stickbutton>
+                <stickbutton index="1">
+                    <slots>
+                        <slot>
+                            <code>1</code>
+                            <mode>mousemovement</mode>
+                        </slot>
+                    </slots>
+                </stickbutton>
+                <stickbutton index="7">
+                    <slots>
+                        <slot>
+                            <code>3</code>
+                            <mode>mousemovement</mode>
+                        </slot>
+                    </slots>
+                </stickbutton>
+                <stickbutton index="5">
+                    <slots>
+                        <slot>
+                            <code>2</code>
+                            <mode>mousemovement</mode>
+                        </slot>
+                    </slots>
+                </stickbutton>
+            </stick>
+            <stick index="1">
+                <calibrated>false</calibrated>
+                <summary></summary>
+                <stickbutton index="3">
+                    <slots>
+                        <slot>
+                            <code>7</code>
+                            <mode>mousebutton</mode>
+                        </slot>
+                    </slots>
+                </stickbutton>
+                <stickbutton index="1">
+                    <slots>
+                        <slot>
+                            <code>4</code>
+                            <mode>mousebutton</mode>
+                        </slot>
+                    </slots>
+                </stickbutton>
+                <stickbutton index="7">
+                    <slots>
+                        <slot>
+                            <code>6</code>
+                            <mode>mousebutton</mode>
+                        </slot>
+                    </slots>
+                </stickbutton>
+                <stickbutton index="5">
+                    <slots>
+                        <slot>
+                            <code>5</code>
+                            <mode>mousebutton</mode>
+                        </slot>
+                    </slots>
+                </stickbutton>
+            </stick>
+            <dpad index="1">
+                <dpadbutton index="4">
+                    <cycleresetinterval>1000</cycleresetinterval>
+                    <slots>
+                        <slot>
+                            <code>10</code>
+                            <mode>release</mode>
+                        </slot>
+                        <slot>
+                            <code>0</code>
+                            <mode>pause</mode>
+                        </slot>
+                        <slot>
+                            <code>490</code>
+                            <mode>release</mode>
+                        </slot>
+                        <slot>
+                            <code>1</code>
+                            <mode>cycle</mode>
+                        </slot>
+                        <slot>
+                            <code>10</code>
+                            <mode>release</mode>
+                        </slot>
+                        <slot>
+                            <code>2</code>
+                            <mode>setchange</mode>
+                        </slot>
+                        <slot>
+                            <path>/bin/bash</path>
+                            <arguments>-c &quot;notify-send -t 5000 'Set 3'&quot;</arguments>
+                            <mode>execute</mode>
+                        </slot>
+                    </slots>
+                </dpadbutton>
+            </dpad>
+            <trigger index="6">
+                <deadZone>2000</deadZone>
+                <center_value>0</center_value>
+                <min_value>-32767</min_value>
+                <max_value>32767</max_value>
+                <throttle>positivehalf</throttle>
+                <triggerbutton index="2">
+                    <slots>
+                        <slot>
+                            <code>1</code>
+                            <mode>mousebutton</mode>
+                        </slot>
+                    </slots>
+                </triggerbutton>
+            </trigger>
+            <trigger index="5">
+                <deadZone>2000</deadZone>
+                <center_value>0</center_value>
+                <min_value>-32767</min_value>
+                <max_value>32767</max_value>
+                <throttle>positivehalf</throttle>
+                <triggerbutton index="2">
+                    <slots>
+                        <slot>
+                            <code>3</code>
+                            <mode>mousebutton</mode>
+                        </slot>
+                    </slots>
+                </triggerbutton>
+            </trigger>
+            <button index="4">
+                <slots>
+                    <slot>
+                        <code>2</code>
+                        <mode>mousebutton</mode>
+                    </slot>
+                </slots>
+            </button>
+            <button index="3">
+                <slots>
+                    <slot>
+                        <code>0x1000021</code>
+                        <mode>keyboard</mode>
+                    </slot>
+                </slots>
+            </button>
+            <button index="2">
+                <slots>
+                    <slot>
+                        <code>0x1000003</code>
+                        <mode>keyboard</mode>
+                    </slot>
+                </slots>
+            </button>
+            <button index="1">
+                <slots>
+                    <slot>
+                        <code>0x1000004</code>
+                        <mode>keyboard</mode>
+                    </slot>
+                </slots>
+            </button>
+            <button index="8">
+                <setselect>4</setselect>
+                <setselectcondition>while-held</setselectcondition>
+            </button>
+            <button index="5">
+                <turbointerval>100</turbointerval>
+                <slots>
+                    <slot>
+                        <path>/bin/bash</path>
+                        <arguments>-c &quot;keyboard-toggle&quot;</arguments>
+                        <mode>execute</mode>
+                    </slot>
+                </slots>
+            </button>
+            <button index="11">
+                <slots>
+                    <slot>
+                        <code>0x1000022</code>
+                        <mode>keyboard</mode>
+                    </slot>
+                    <slot>
+                        <code>0x100003b</code>
+                        <mode>keyboard</mode>
+                    </slot>
+                </slots>
+            </button>
+            <button index="10">
+                <slots>
+                    <slot>
+                        <path>/bin/bash</path>
+                        <arguments>-c &quot;swaymsg workspace prev&quot;</arguments>
+                        <mode>execute</mode>
+                    </slot>
+                </slots>
+            </button>
+            <button index="9">
+                <setselect>2</setselect>
+                <setselectcondition>while-held</setselectcondition>
+            </button>
+        </set>
+        <set index="5">
+            <trigger index="6">
+                <center_value>0</center_value>
+                <min_value>-32767</min_value>
+                <max_value>32767</max_value>
+                <throttle>positivehalf</throttle>
+            </trigger>
+            <trigger index="5">
+                <center_value>0</center_value>
+                <min_value>-32767</min_value>
+                <max_value>32767</max_value>
+                <throttle>positivehalf</throttle>
+            </trigger>
+            <button index="1">
+                <setselect>4</setselect>
+                <setselectcondition>while-held</setselectcondition>
+            </button>
+        </set>
+    </sets>
+</gamecontroller>

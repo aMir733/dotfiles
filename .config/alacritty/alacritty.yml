@@ -1,32 +1,73 @@
 window:
-        padding:
-                x: 3
-                y: 2
+  padding:
+    x: 3
+    y: 2
+  dimensions:
+    columns: 170
+    lines: 45
+
 
 font:
-        normal:
-                family: 'JetBrains Mono'
-                style: 'Medium'
-        bold:
-                family: 'JetBrains Mono'
-                style: 'Bold'
-        italic:
-                family: 'JetBrains Mono'
-                style: 'Italic'
-        bold_italic:
-                family: 'JetBrains Mono'
-                style: 'Bold Italic'
+  normal:
+    family: JetBrains Mono
+    style: Medium
+  bold:
+    family: JetBrains Mono
+    style: Bold
+  italic:
+    family: JetBrains Mono
+    style: Italic
+  bold_italic:
+    family: JetBrains Mono
+    style: Bold Italic
 
-        size: 10
-
-colors:
-        primary:
-                background: '#09090b'
-                foreground: '#e1eaea'
+  size: 10
 
 shell:
-        program: '/bin/zsh'
-        args:
-                - '-l'
-                - '-c'
-                - "tmux"
+  program: '/bin/zsh'
+  args:
+      - '-l'
+      - '-c'
+      - "tmux"
+
+colors:
+  # COLORSCHEME: blood_moon.yaml
+  # Default colors
+  primary:
+    background: '0x10100E'
+    foreground: '0xC6C6C4'
+
+  # Normal colors
+  normal:
+    black: '0x10100E'
+    red: '0xC40233'
+    green: '0x009F6B'
+    yellow: '0xFFD700'
+    blue: '0x0087BD'
+    magenta: '0x9A4EAE'
+    cyan: '0x20B2AA'
+    white: '0xC6C6C4'
+
+  # Bright colors
+  bright:
+    black: '0x696969'
+    red: '0xFF2400'
+    green: '0x03C03C'
+    yellow: '0xFDFF00'
+    blue: '0x007FFF'
+    magenta: '0xFF1493'
+    cyan: '0x00CCCC'
+    white: '0xFFFAFA'
+  cursor:
+    text: '0x191622'
+    cursor: '0xf8f8f2'
+
+  dim:
+    black: '0x000000'
+    red: '0xa90000'
+    green: '0x049f2b'
+    yellow: '0xa3b106'
+    blue: '0x530aba'
+    magenta: '0xbb006b'
+    cyan: '0x433364'
+    white: '0x5f5f5f'
