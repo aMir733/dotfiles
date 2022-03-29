@@ -4,7 +4,7 @@
     "spacing": 4,
     "modules-left": ["custom/launcher", "custom/separator", "sway/workspaces", "sway/mode", "custom/media"],
     "modules-center": ["clock"],
-    "modules-right": ["custom/separator", "cpu", "custom/separator", "temperature", "custom/separator", "sway/language", "tray", "custom/separator", "custom/powermenu"],
+    "modules-right": ["cpu", "temperature", "custom/audio", "sway/language", "custom/separator", "tray", "custom/separator", "custom/powermenu"],
 
     "sway/workspaces": {
         "format": "{icon}",
@@ -48,6 +48,24 @@
         "format": "{temperatureC}°C {icon}",
         "format-icons": ["", "", ""]
     },
+    "pulseaudio": {
+        "format": "{volume}% {icon} {format_source}",
+        "format-bluetooth": "{volume}% {icon} {format_source}",
+        "format-bluetooth-muted": " {icon} {format_source}",
+        "format-muted": " {format_source}",
+        "format-source": "{volume}% ",
+        "format-source-muted": "",
+        "format-icons": {
+            "headphone": "",
+            "hands-free": "",
+            "headset": "",
+            "phone": "",
+            "portable": "",
+            "car": "",
+            "default": ["", "", ""]
+        },
+        "on-click": "pavucontrol"
+    },
     "sway/language": {
         "format": "{} ",
         "tooltip": false,
@@ -66,9 +84,23 @@
         "on-click": "pgrep wofi && killall wofi || powermenu"
     },
     "custom/separator": {
-    "format": "|",
-    "interval": "once",
-    "tooltip": false
+        "format": "|",
+        "interval": "once",
+        "tooltip": false
+    },
+    "custom/audio": {
+        "format": "{icon}",
+        "format-icons": {
+            "hdmi": "",
+            "headphone": "",
+            "buds": "",
+            "default": ["","","",""]
+        },
+        "exec": ".config/waybar/modules/audio.sh",
+        "return-type": "json",
+        "interval": 3,
+        "on-click": "pavucontrol",
+        "on-click-right": "audio-output-switch",
     }
 }
 

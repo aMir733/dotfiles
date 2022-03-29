@@ -4,8 +4,8 @@
     <sdlname>Xbox One Wireless Controller</sdlname>
     <!--The Unique ID for a joystick is included for informational purposes only.-->
     <uniqueID>050000005e040000e0020000030900001118736</uniqueID>
-    <stickAxisAssociation index="1" xAxis="1" yAxis="2"/>
     <stickAxisAssociation index="2" xAxis="3" yAxis="4"/>
+    <stickAxisAssociation index="1" xAxis="1" yAxis="2"/>
     <vdpadButtonAssociations index="1">
         <vdpadButtonAssociation axis="0" button="12" direction="1"/>
         <vdpadButtonAssociation axis="0" button="13" direction="4"/>
@@ -13,39 +13,17 @@
         <vdpadButtonAssociation axis="0" button="15" direction="2"/>
     </vdpadButtonAssociations>
     <names>
-        <controlstickname index="1">Stick 1</controlstickname>
         <controlstickname index="2">Stick 2</controlstickname>
+        <controlstickname index="1">Stick 1</controlstickname>
     </names>
     <keyPressTime>50</keyPressTime>
     <sets>
-        <set index="1">
-            <trigger index="5">
-                <center_value>0</center_value>
-                <min_value>-32767</min_value>
-                <max_value>32767</max_value>
-                <throttle>positivehalf</throttle>
-            </trigger>
-            <trigger index="6">
-                <center_value>0</center_value>
-                <min_value>-32767</min_value>
-                <max_value>32767</max_value>
-                <throttle>positivehalf</throttle>
-            </trigger>
-            <button index="8">
-                <setselect>3</setselect>
-                <setselectcondition>while-held</setselectcondition>
-            </button>
-        </set>
         <set index="3">
             <dpad index="1">
                 <dpadbutton index="1">
                     <slots>
                         <slot>
-                            <code>40</code>
-                            <mode>pause</mode>
-                        </slot>
-                        <slot>
-                            <profile>/home/amir/gamepad/desktop.gamecontroller.amgp</profile>
+                            <profile>/home/amir/.antimicro/desktop.gamecontroller.amgp</profile>
                             <mode>loadprofile</mode>
                         </slot>
                         <slot>
@@ -78,6 +56,24 @@
             </button>
             <button index="8">
                 <setselect>1</setselect>
+                <setselectcondition>while-held</setselectcondition>
+            </button>
+        </set>
+        <set index="1">
+            <trigger index="5">
+                <center_value>0</center_value>
+                <min_value>-32767</min_value>
+                <max_value>32767</max_value>
+                <throttle>positivehalf</throttle>
+            </trigger>
+            <trigger index="6">
+                <center_value>0</center_value>
+                <min_value>-32767</min_value>
+                <max_value>32767</max_value>
+                <throttle>positivehalf</throttle>
+            </trigger>
+            <button index="8">
+                <setselect>3</setselect>
                 <setselectcondition>while-held</setselectcondition>
             </button>
         </set>

@@ -41,12 +41,12 @@ input type:pointer {
 # borders
 hide_edge_borders smart
 
-# Startups
-exec nm-applet --indicator
-exec antimicro --tray
 # Startup in specific workspaces
 exec swaymsg 'workspace 1; exec firefox'
 exec swaymsg 'workspace 2; exec alacritty'
+# Startups
+exec 'nm-applet --indicator'
+exec 'sleep 3; antimicro --tray'
 
 
 # Bindings

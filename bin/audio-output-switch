@@ -1,11 +1,13 @@
-#/bin/bash -e
+#!/bin/bash
 
-headphone="alsa_output.usb-Sony_Interactive_Entertainment_Wireless_Stereo_Headset-00.iec958-stereo"
-buds="bluez_sink.A8_87_B3_01_80_07.a2dp_sink"
-hdmi="alsa_output.pci-0000_00.1.hdmi-stereo"
-case $1 in
-    headphone) pacmd set-default-sink $headphone ;;
-    buds) pacmd set-default-sink $buds ;;
-    hdmi) pacmd set-default-sink $hdmi ;;
-    *) pacmd set-default-sink `pacmd list-sinks | grep index | tee /dev/stdout | grep -m1 -A1 "* index" | tail -1 | cut -c12-` ;;
-esac
+if [ "a$1" != "a" ] ; then
+    wpctl status | sed -n '/^Audio$/,/Sink endpoints:$/p' | sed -n '/\[vol: .*\]/p' | grep "$1" | tr -d '*' | awk -F" +" '{ print $3 }' | tr -d '.' | head -n 1 | xargs wpctl set-default
+else
+    ALL_OUTPUT="$(wpctl status | sed -n '/^Audio$/,/Sink endpoints:$/p' | sed -n '/\[vol: .*\]/p')"
+    CURRENT="$(echo "$ALL_OUTPUT" | grep -A 1 '*')"
+    if [ $(echo "$CURRENT" | wc -l) == 1 ] ; then
+        echo "$ALL_OUTPUT" | head -n 1 | tr -d '*' | awk -F" +" '{ print $3 }' | tr -d '.' | xargs wpctl set-default
+    else
+        echo "$CURRENT" | tail -n 1 | tr -d '*' | awk -F" +" '{ print $3 }' | tr -d '.' | xargs wpctl set-default
+    fi
+fi

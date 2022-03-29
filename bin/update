@@ -1,0 +1,7 @@
+#!/bin/bash
+
+for script in $HOME/updates/* ; do
+    bash "$script"
+done
+
+sudo apt update && sudo apt upgrade $1
