@@ -1,40 +1,27 @@
 {
-    "position": "top",
-    "height": 30,
+    "position": "bottom",
+    "height": 36,
     "spacing": 4,
-    "modules-left": ["custom/launcher", "custom/separator", "sway/workspaces", "sway/mode", "custom/media"],
-    "modules-center": ["clock"],
-    "modules-right": ["cpu", "temperature", "custom/audio", "sway/language", "custom/separator", "tray", "custom/separator", "custom/powermenu"],
+    "modules-left": ["custom/launcher", "wlr/taskbar", "sway/mode", "custom/media"],
+    "modules-center": ["sway/workspaces"],
+    "modules-right": ["network", "disk", "memory", "cpu", "temperature", "custom/audio", "sway/language", "tray", "custom/separator", "clock", "custom/separator", "custom/powermenu"],
 
     "sway/workspaces": {
-        "format": "{icon}",
-        "disable-scroll": true,
-        "format-icons": {
-            "1": "",
-            "2": "",
-            "3": "3",
-            "4": "4",
-            "5": "5",
-            "6": "6",
-            "7": "7",
-            "8": "",
-            "9": "",
-            "10": "",
-            "urgent": "",
-            "focused": "",
-            "default": ""
-        }
+        "format": "{icon}"
     },
     "sway/mode": {
         "format": "<span style=\"italic\">{}</span>"
     },
     "tray": {
-        // "icon-size": 21,
+        "icon-size": 15,
         "spacing": 10
     },
     "clock": {
         "tooltip-format": "<big>{:%Y %B}</big>\n<tt><small>{calendar}</small></tt>",
-        "format": "{:<b>%e %b</b>  |  <b>%H:%M</b>}",
+        "today-format": "<b>{}</b>",
+        "format": "{:<b>%H:%M</b>  | <b>%e %b</b>}",
+        //"format": "{:<b>%H:%M</b>}",
+        //"format-alt": "{:<b>%e %b</b>  |  <b>%H:%M</b>}"
     },
     "cpu": {
         "format": "{usage}% ",
@@ -42,46 +29,55 @@
     },
     "temperature": {
         // "thermal-zone": 2,
-        "hwmon-path": "/sys/class/hwmon/hwmon2/temp1_input",
+        "hwmon-path": "/sys/class/hwmon/hwmon1/temp1_input",
         "critical-threshold": 80,
         // "format-critical": "{temperatureC}°C {icon}",
         "format": "{temperatureC}°C {icon}",
-        "format-icons": ["", "", ""]
+        "format-icons": ["", "", ""]
     },
-    "pulseaudio": {
-        "format": "{volume}% {icon} {format_source}",
-        "format-bluetooth": "{volume}% {icon} {format_source}",
-        "format-bluetooth-muted": " {icon} {format_source}",
-        "format-muted": " {format_source}",
-        "format-source": "{volume}% ",
-        "format-source-muted": "",
-        "format-icons": {
-            "headphone": "",
-            "hands-free": "",
-            "headset": "",
-            "phone": "",
-            "portable": "",
-            "car": "",
-            "default": ["", "", ""]
-        },
-        "on-click": "pavucontrol"
+    "memory": {
+        "interval": 30,
+        "format": "{percentage}% ",
+        "max-length": 10
+    },
+    "network": {
+        "interface": "enp0s20f0u7",
+        "format": "{bandwidthUpBytes} \uf0aa   {bandwidthDownBytes} \uf0ab",
+        "format-disconnected": "",
+        "tooltip-format": "{ifname}",
+        "interval": 2
     },
     "sway/language": {
         "format": "{} ",
         "tooltip": false,
         "on-click": "keyboard-toggle"
     },
+    "disk": {
+        "interval": 90,
+        "format": "{free} ",
+        "path": "/"
+    },
+    "wlr/taskbar": {
+        "format": "{icon}",
+        "tooltip-format": "{title}",
+        "icon-theme": "Adwaita",
+        "icon-size": 22,
+        "on-click": "activate",
+        "on-click-middle": "close"
+    },
     "custom/launcher":{
-        "format": "",
-        "on-click": "pgrep wofi && killall wofi || wofi --show drun"
+        "format": "",
+        "tooltip": false,
+        "on-click": "launcher"
     },
     "custom/keyboard":{
         "format": "",
         "on-click": "keyboard-toggle"
     },
     "custom/powermenu":{
-        "format": "",
-        "on-click": "pgrep wofi && killall wofi || powermenu"
+        "format": "",
+        "tooltip": false,
+        "on-click": "powermenu"
     },
     "custom/separator": {
         "format": "|",
@@ -89,18 +85,22 @@
         "tooltip": false
     },
     "custom/audio": {
-        "format": "{icon}",
+        "format": " {}% | {icon}",
         "format-icons": {
-            "hdmi": "",
-            "headphone": "",
-            "buds": "",
-            "default": ["","","",""]
+            "hdmi": "",
+            "headphone": "",
+            "buds": "",
+            "other": "",
+            //"default": ["","","",""]
         },
-        "exec": ".config/waybar/modules/audio.sh",
+        "exec": "~/.config/waybar/modules/audio.sh",
+        "exec-on-event": true,
         "return-type": "json",
         "interval": 3,
         "on-click": "pavucontrol",
         "on-click-right": "audio-output-switch",
+        "on-scroll-up": "set-volume 0.01",
+        "on-scroll-down": "set-volume -0.01"
     }
 }
 

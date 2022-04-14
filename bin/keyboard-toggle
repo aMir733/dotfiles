@@ -1,10 +1,7 @@
 #!/bin/bash
-if swaymsg -t get_tree | grep '"height": 666' &>/dev/null ; then
-    busctl call --user sm.puri.OSK0 /sm/puri/OSK0 sm.puri.OSK0 SetVisible b false 
-    killall squeekboard &>/dev/null
-else 
-    killall squeekboard &>/dev/null
-    swaymsg exec squeekboard
-    sleep 0.1
-    busctl call --user sm.puri.OSK0 /sm/puri/OSK0 sm.puri.OSK0 SetVisible b true
-fi
+show_keyboard () { busctl call --user sm.puri.OSK0 /sm/puri/OSK0 sm.puri.OSK0 SetVisible b $1 ; }
+case "$(busctl --user get-property sm.puri.OSK0 /sm/puri/OSK0 sm.puri.OSK0 Visible)" in
+    "b false") show_keyboard true ;;
+    "b true") show_keyboard false ;;
+    *) squeekboard &>/dev/null & sleep 0.1 && show_keyboard true ;;
+esac

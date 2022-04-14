@@ -21,5 +21,7 @@ case $1 in
 	zsh) nvim $HOME/.zshrc ;;
 	tmux) nvim $HOME/.tmux.conf ;;
 	alacritty) nvim $CONFIG_PATH/alacritty/alacritty.yml ;;
+        portage-make) sudo nvim /etc/portage/make.conf ;;
+        portage-bleeding) sudo nvim /etc/portage/package.accept_keywords/bleeding-edge ;;
 	*) echo "Invalid Input. Usage: conf [i3,picom,polybar]" ; exit 1 ;;
 esac

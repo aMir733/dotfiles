@@ -1,7 +1,9 @@
 #!/bin/bash
 
+# Updating manually installed applications/drivers
 for script in $HOME/updates/* ; do
     bash "$script"
 done
 
+# apt
 sudo apt update && sudo apt upgrade $1

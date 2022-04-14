@@ -1,109 +1,82 @@
+@define-color bg #000000;
+@define-color fg #ffffff;
+@define-color dark #181818;
+@define-color light #272727;
+@define-color red #eb4d4b;
+
 * {
     /* `otf-font-awesome` is required to be installed for icons */
-    font-family: Cantarell, "FontAwesome", Noto Sans;
+    font-family: Cantarell, "Font Awesome 6 Free Solid", "Font Awesome 6 Brands", "Font Awesome 6 Free Regular", Noto Sans;
     font-size: 13px;
+    border: none;
+    border-radius: 3px;
 }
 
 window#waybar {
-    background-color: #000000;
-    border-bottom: 3px solid rgba(100, 114, 125, 0.5);
-    color: #ffffff;
+    background-color: @bg;
+    border-radius: 0px;
+    color: @fg;
     transition-property: background-color;
     transition-duration: .5s;
 }
 
-window#waybar.hidden {
-    opacity: 0.2;
+#clock,
+#cpu,
+#temperature,
+#memory,
+#custom-media,
+#tray,
+#mode,
+#disk,
+#custom-powermenu,
+#custom-audio,
+#language,
+#network,
+#custom-launcher {
+    padding: 0 8;
+    background: @dark;
+    margin-top: 6;
+    margin-bottom: 6;
 }
 
-window#waybar.empty {
-    /*
-    background-color: transparent;
-    */
-    background-color: #FFFFFF;
+#language,
+#custom-powermenu,
+#custom-audio {
+    background: @light;
 }
 
-window#waybar.solo {
-    background-color: #FFFFFF;
-}
-
-
-window#waybar.termite {
-    background-color: #3F3F3F;
-}
-
-window#waybar.firefox {
-    background-color: #000000;
-    border: none;
+#custom-launcher {
+    margin: 0;
+    margin-right: 0;
+    border-radius: 0;
+    padding: 0 13;
 }
 
 #workspaces button {
-    padding: 0 5px;
-    background-color: transparent;
-    color: #ffffff;
-    /* Use box-shadow instead of border so the text isn't offset */
-    box-shadow: inset 0 -3px transparent;
-    /* Avoid rounded borders under each workspace name */
-    border: none;
-    border-radius: 0;
+    color: @fg;
+    padding: 0px 5px 0px 5px;
+    margin-top: 6px;
+    margin-bottom: 6px;
 }
 
-/* https://github.com/Alexays/Waybar/wiki/FAQ#the-workspace-buttons-have-a-strange-hover-effect */
 #workspaces button:hover {
     background: rgba(0, 0, 0, 0.2);
     box-shadow: inset 0 -3px #ffffff;
 }
 
 #workspaces button.focused {
-    background-color: #64727D;
-    box-shadow: inset 0 -3px #ffffff;
+    background-color: @light;
 }
 
 #workspaces button.urgent {
-    background-color: #eb4d4b;
+    background-color: @red;
 }
 
-#mode {
-    background-color: #64727D;
-    border-bottom: 3px solid #ffffff;
+#taskbar {
+    margin-top: 3px;
 }
-
-#clock,
-#cpu,
-#temperature,
-#custom-media,
-#tray,
-#mode,
-#custom-powermenu {
-    padding: 0 10px;
-    color: #ffffff;
-}
-
-#language {
-   padding: 0 0 0 10px;
-   color: #ffffff;
-}
-
-#window,
-#workspaces,
-#custom-launcher {
-    margin: 0 4px;
-}
-
-/* If workspaces is the leftmost module, omit left margin */
-.modules-left > widget:first-child > #workspaces {
-    margin-left: 0;
-}
-
-/*
-.modules-left > widget:first-child > #custom-launcher {
-    margin-left: 0;
-}
-*/
-
-/* If workspaces is the rightmost module, omit right margin */
-.modules-right > widget:last-child > #workspaces {
-    margin-right: 0;
+#taskbar button.active {
+    background: @light;
 }
 
 label:focus {

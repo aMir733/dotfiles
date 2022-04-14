@@ -18,8 +18,70 @@
     </names>
     <keyPressTime>50</keyPressTime>
     <sets>
+        <set index="4">
+            <trigger index="6">
+                <center_value>0</center_value>
+                <min_value>-32767</min_value>
+                <max_value>32767</max_value>
+                <throttle>positivehalf</throttle>
+            </trigger>
+            <trigger index="5">
+                <center_value>0</center_value>
+                <min_value>-32767</min_value>
+                <max_value>32767</max_value>
+                <throttle>positivehalf</throttle>
+            </trigger>
+            <button index="1">
+                <setselect>5</setselect>
+                <setselectcondition>while-held</setselectcondition>
+            </button>
+        </set>
+        <set index="3">
+            <dpad index="1">
+                <dpadbutton index="4">
+                    <slots>
+                        <slot>
+                            <code>40</code>
+                            <mode>pause</mode>
+                        </slot>
+                        <slot>
+                            <profile>/home/amir/.config/antimicrox/ingame.gamecontroller.amgp</profile>
+                            <mode>loadprofile</mode>
+                        </slot>
+                    </slots>
+                </dpadbutton>
+            </dpad>
+            <trigger index="6">
+                <center_value>0</center_value>
+                <min_value>-32767</min_value>
+                <max_value>32767</max_value>
+                <throttle>positivehalf</throttle>
+            </trigger>
+            <trigger index="5">
+                <center_value>0</center_value>
+                <min_value>-32767</min_value>
+                <max_value>32767</max_value>
+                <throttle>positivehalf</throttle>
+            </trigger>
+            <button index="6">
+                <cycleresetinterval>1000</cycleresetinterval>
+            </button>
+            <button index="8">
+                <setselect>1</setselect>
+                <setselectcondition>while-held</setselectcondition>
+            </button>
+        </set>
         <set index="2">
             <dpad index="1">
+                <dpadbutton index="4">
+                    <slots>
+                        <slot>
+                            <path>/bin/bash</path>
+                            <arguments>-c &quot;audio-output-switch&quot;</arguments>
+                            <mode>execute</mode>
+                        </slot>
+                    </slots>
+                </dpadbutton>
                 <dpadbutton index="8">
                     <slots>
                         <slot>
@@ -32,32 +94,7 @@
                         </slot>
                     </slots>
                 </dpadbutton>
-                <dpadbutton index="4">
-                    <slots>
-                        <slot>
-                            <path>/bin/bash</path>
-                            <arguments>-c &quot;audio-output-switch&quot;</arguments>
-                            <mode>execute</mode>
-                        </slot>
-                    </slots>
-                </dpadbutton>
             </dpad>
-            <trigger index="5">
-                <deadZone>2000</deadZone>
-                <center_value>0</center_value>
-                <min_value>-32767</min_value>
-                <max_value>32767</max_value>
-                <throttle>positivehalf</throttle>
-                <triggerbutton index="2">
-                    <slots>
-                        <slot>
-                            <path>/bin/bash</path>
-                            <arguments>-c &quot;swaymsg move container to workspace  $((`swaymsg -t get_workspaces | jq -r '.[] | select(.focused).name'` - 1))&quot;</arguments>
-                            <mode>execute</mode>
-                        </slot>
-                    </slots>
-                </triggerbutton>
-            </trigger>
             <trigger index="6">
                 <deadZone>2000</deadZone>
                 <center_value>0</center_value>
@@ -74,37 +111,22 @@
                     </slots>
                 </triggerbutton>
             </trigger>
-            <button index="4">
-                <slots>
-                    <slot>
-                        <path>/bin/bash</path>
-                        <arguments>-c &quot;swaymsg fullscreen&quot;</arguments>
-                        <mode>execute</mode>
-                    </slot>
-                </slots>
-            </button>
-            <button index="9">
-                <setselect>1</setselect>
-                <setselectcondition>while-held</setselectcondition>
-            </button>
-            <button index="10">
-                <slots>
-                    <slot>
-                        <path>/bin/bash</path>
-                        <arguments>-c &quot;swaymsg workspace $((`swaymsg -t get_workspaces | jq -r '.[] | select(.focused).name'` - 1))&quot;</arguments>
-                        <mode>execute</mode>
-                    </slot>
-                </slots>
-            </button>
-            <button index="11">
-                <slots>
-                    <slot>
-                        <path>/bin/bash</path>
-                        <arguments>-c &quot;swaymsg workspace $((`swaymsg -t get_workspaces | jq -r '.[] | select(.focused).name'` + 1))&quot;</arguments>
-                        <mode>execute</mode>
-                    </slot>
-                </slots>
-            </button>
+            <trigger index="5">
+                <deadZone>2000</deadZone>
+                <center_value>0</center_value>
+                <min_value>-32767</min_value>
+                <max_value>32767</max_value>
+                <throttle>positivehalf</throttle>
+                <triggerbutton index="2">
+                    <slots>
+                        <slot>
+                            <path>/bin/bash</path>
+                            <arguments>-c &quot;swaymsg move container to workspace  $((`swaymsg -t get_workspaces | jq -r '.[] | select(.focused).name'` - 1))&quot;</arguments>
+                            <mode>execute</mode>
+                        </slot>
+                    </slots>
+                </triggerbutton>
+            </trigger>
             <button index="5">
                 <slots>
                     <slot>
@@ -121,90 +143,42 @@
                     </slot>
                 </slots>
             </button>
-        </set>
-        <set index="3">
-            <dpad index="1">
-                <dpadbutton index="4">
-                    <slots>
-                        <slot>
-                            <code>40</code>
-                            <mode>pause</mode>
-                        </slot>
-                        <slot>
-                            <profile>/home/amir/.antimicro/ingame.gamecontroller.amgp</profile>
-                            <mode>loadprofile</mode>
-                        </slot>
-                    </slots>
-                </dpadbutton>
-            </dpad>
-            <trigger index="5">
-                <center_value>0</center_value>
-                <min_value>-32767</min_value>
-                <max_value>32767</max_value>
-                <throttle>positivehalf</throttle>
-            </trigger>
-            <trigger index="6">
-                <center_value>0</center_value>
-                <min_value>-32767</min_value>
-                <max_value>32767</max_value>
-                <throttle>positivehalf</throttle>
-            </trigger>
-            <button index="6">
-                <cycleresetinterval>1000</cycleresetinterval>
+            <button index="11">
+                <slots>
+                    <slot>
+                        <path>/bin/bash</path>
+                        <arguments>-c &quot;swaymsg workspace $((`swaymsg -t get_workspaces | jq -r '.[] | select(.focused).name'` + 1))&quot;</arguments>
+                        <mode>execute</mode>
+                    </slot>
+                </slots>
             </button>
-            <button index="8">
+            <button index="10">
+                <slots>
+                    <slot>
+                        <path>/bin/bash</path>
+                        <arguments>-c &quot;swaymsg workspace $((`swaymsg -t get_workspaces | jq -r '.[] | select(.focused).name'` - 1))&quot;</arguments>
+                        <mode>execute</mode>
+                    </slot>
+                </slots>
+            </button>
+            <button index="9">
                 <setselect>1</setselect>
                 <setselectcondition>while-held</setselectcondition>
             </button>
-        </set>
-        <set index="4">
-            <trigger index="5">
-                <center_value>0</center_value>
-                <min_value>-32767</min_value>
-                <max_value>32767</max_value>
-                <throttle>positivehalf</throttle>
-            </trigger>
-            <trigger index="6">
-                <center_value>0</center_value>
-                <min_value>-32767</min_value>
-                <max_value>32767</max_value>
-                <throttle>positivehalf</throttle>
-            </trigger>
-            <button index="1">
-                <setselect>5</setselect>
-                <setselectcondition>while-held</setselectcondition>
-            </button>
-        </set>
-        <set index="5">
-            <trigger index="5">
-                <center_value>0</center_value>
-                <min_value>-32767</min_value>
-                <max_value>32767</max_value>
-                <throttle>positivehalf</throttle>
-            </trigger>
-            <trigger index="6">
-                <center_value>0</center_value>
-                <min_value>-32767</min_value>
-                <max_value>32767</max_value>
-                <throttle>positivehalf</throttle>
-            </trigger>
-            <button index="1">
-                <setselect>4</setselect>
-                <setselectcondition>while-held</setselectcondition>
+            <button index="4">
+                <slots>
+                    <slot>
+                        <path>/bin/bash</path>
+                        <arguments>-c &quot;swaymsg fullscreen&quot;</arguments>
+                        <mode>execute</mode>
+                    </slot>
+                </slots>
             </button>
         </set>
         <set index="1">
             <stick index="2">
                 <calibrated>false</calibrated>
                 <summary></summary>
-                <stickbutton index="1">
-                    <slots>
-                        <slot>
-                            <code>1</code>
-                            <mode>mousemovement</mode>
-                        </slot>
-                    </slots>
-                </stickbutton>
                 <stickbutton index="3">
                     <slots>
                         <slot>
@@ -213,10 +187,10 @@
                         </slot>
                     </slots>
                 </stickbutton>
-                <stickbutton index="5">
+                <stickbutton index="1">
                     <slots>
                         <slot>
-                            <code>2</code>
+                            <code>1</code>
                             <mode>mousemovement</mode>
                         </slot>
                     </slots>
@@ -229,18 +203,18 @@
                         </slot>
                     </slots>
                 </stickbutton>
+                <stickbutton index="5">
+                    <slots>
+                        <slot>
+                            <code>2</code>
+                            <mode>mousemovement</mode>
+                        </slot>
+                    </slots>
+                </stickbutton>
             </stick>
             <stick index="1">
                 <calibrated>false</calibrated>
                 <summary></summary>
-                <stickbutton index="1">
-                    <slots>
-                        <slot>
-                            <code>4</code>
-                            <mode>mousebutton</mode>
-                        </slot>
-                    </slots>
-                </stickbutton>
                 <stickbutton index="3">
                     <slots>
                         <slot>
@@ -249,10 +223,10 @@
                         </slot>
                     </slots>
                 </stickbutton>
-                <stickbutton index="5">
+                <stickbutton index="1">
                     <slots>
                         <slot>
-                            <code>5</code>
+                            <code>4</code>
                             <mode>mousebutton</mode>
                         </slot>
                     </slots>
@@ -265,16 +239,16 @@
                         </slot>
                     </slots>
                 </stickbutton>
-            </stick>
-            <dpad index="1">
-                <dpadbutton index="1">
+                <stickbutton index="5">
                     <slots>
                         <slot>
-                            <code>0x1000013</code>
-                            <mode>keyboard</mode>
+                            <code>5</code>
+                            <mode>mousebutton</mode>
                         </slot>
                     </slots>
-                </dpadbutton>
+                </stickbutton>
+            </stick>
+            <dpad index="1">
                 <dpadbutton index="2">
                     <slots>
                         <slot>
@@ -283,10 +257,10 @@
                         </slot>
                     </slots>
                 </dpadbutton>
-                <dpadbutton index="8">
+                <dpadbutton index="1">
                     <slots>
                         <slot>
-                            <code>0x1000012</code>
+                            <code>0x1000013</code>
                             <mode>keyboard</mode>
                         </slot>
                     </slots>
@@ -300,22 +274,15 @@
                         </slot>
                     </slots>
                 </dpadbutton>
-            </dpad>
-            <trigger index="5">
-                <deadZone>2000</deadZone>
-                <center_value>0</center_value>
-                <min_value>-32767</min_value>
-                <max_value>32767</max_value>
-                <throttle>positivehalf</throttle>
-                <triggerbutton index="2">
+                <dpadbutton index="8">
                     <slots>
                         <slot>
-                            <code>3</code>
-                            <mode>mousebutton</mode>
+                            <code>0x1000012</code>
+                            <mode>keyboard</mode>
                         </slot>
                     </slots>
-                </triggerbutton>
-            </trigger>
+                </dpadbutton>
+            </dpad>
             <trigger index="6">
                 <deadZone>2000</deadZone>
                 <center_value>0</center_value>
@@ -331,39 +298,27 @@
                     </slots>
                 </triggerbutton>
             </trigger>
-            <button index="2">
-                <slots>
-                    <slot>
-                        <code>0x1000003</code>
-                        <mode>keyboard</mode>
-                    </slot>
-                </slots>
-            </button>
-            <button index="3">
-                <slots>
-                    <slot>
-                        <code>0x1000020</code>
-                        <mode>keyboard</mode>
-                    </slot>
-                </slots>
-            </button>
-            <button index="4">
-                <slots>
-                    <slot>
-                        <code>2</code>
-                        <mode>mousebutton</mode>
-                    </slot>
-                </slots>
-            </button>
-            <button index="9">
-                <setselect>2</setselect>
-                <setselectcondition>while-held</setselectcondition>
-            </button>
-            <button index="10">
+            <trigger index="5">
+                <deadZone>2000</deadZone>
+                <center_value>0</center_value>
+                <min_value>-32767</min_value>
+                <max_value>32767</max_value>
+                <throttle>positivehalf</throttle>
+                <triggerbutton index="2">
+                    <slots>
+                        <slot>
+                            <code>3</code>
+                            <mode>mousebutton</mode>
+                        </slot>
+                    </slots>
+                </triggerbutton>
+            </trigger>
+            <button index="5">
+                <turbointerval>100</turbointerval>
                 <slots>
                     <slot>
                         <path>/bin/bash</path>
-                        <arguments>-c &quot;swaymsg workspace prev&quot;</arguments>
+                        <arguments>-c &quot;keyboard-toggle&quot;</arguments>
                         <mode>execute</mode>
                     </slot>
                 </slots>
@@ -377,19 +332,42 @@
                     </slot>
                 </slots>
             </button>
-            <button index="5">
-                <turbointerval>100</turbointerval>
+            <button index="10">
                 <slots>
                     <slot>
                         <path>/bin/bash</path>
-                        <arguments>-c &quot;keyboard-toggle&quot;</arguments>
+                        <arguments>-c &quot;swaymsg workspace prev&quot;</arguments>
                         <mode>execute</mode>
                     </slot>
                 </slots>
             </button>
-            <button index="8">
-                <setselect>3</setselect>
+            <button index="9">
+                <setselect>2</setselect>
                 <setselectcondition>while-held</setselectcondition>
+            </button>
+            <button index="4">
+                <slots>
+                    <slot>
+                        <code>2</code>
+                        <mode>mousebutton</mode>
+                    </slot>
+                </slots>
+            </button>
+            <button index="3">
+                <slots>
+                    <slot>
+                        <code>0x1000020</code>
+                        <mode>keyboard</mode>
+                    </slot>
+                </slots>
+            </button>
+            <button index="2">
+                <slots>
+                    <slot>
+                        <code>0x1000003</code>
+                        <mode>keyboard</mode>
+                    </slot>
+                </slots>
             </button>
             <button index="1">
                 <slots>
@@ -398,6 +376,28 @@
                         <mode>keyboard</mode>
                     </slot>
                 </slots>
+            </button>
+            <button index="8">
+                <setselect>3</setselect>
+                <setselectcondition>while-held</setselectcondition>
+            </button>
+        </set>
+        <set index="5">
+            <trigger index="6">
+                <center_value>0</center_value>
+                <min_value>-32767</min_value>
+                <max_value>32767</max_value>
+                <throttle>positivehalf</throttle>
+            </trigger>
+            <trigger index="5">
+                <center_value>0</center_value>
+                <min_value>-32767</min_value>
+                <max_value>32767</max_value>
+                <throttle>positivehalf</throttle>
+            </trigger>
+            <button index="1">
+                <setselect>4</setselect>
+                <setselectcondition>while-held</setselectcondition>
             </button>
         </set>
     </sets>

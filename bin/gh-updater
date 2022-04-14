@@ -1,0 +1,20 @@
+#!/bin/bash
+
+if [[ "a$1" == a ]] || [[ "a$3" == "a" ]] || [[ "a$4" == "a" ]] ; then
+    echo $(basename $0) '[repository] [current version] [matched filename] [output directory]'
+    exit 1
+fi
+PROGRAM_NAME="$(echo $1 | awk -F'/' '{ print $2 }')"
+
+echo -n "Updating $PROGRAM_NAME: "
+CURRENT_VERSION="$2"
+LATEST_VERSION=$(curl --silent "https://api.github.com/repos/$1/releases/latest" | jq -r '.tag_name')
+
+if [[ $CURRENT_VERSION == $LATEST_VERSION ]] ; then
+    echo "Already latest version."
+    exit 2
+fi
+
+mkdir -p "$4"
+echo "$LATEST_VERSION available: downloading..."
+curl --silent "https://api.github.com/repos/$1/releases/latest" | jq -r '.assets[] | select(.name? | match("'$3'")).browser_download_url' | head -n 1 | xargs wget --backups=1 -P "$4"

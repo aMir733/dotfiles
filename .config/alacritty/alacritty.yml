@@ -30,6 +30,9 @@ shell:
       - '-c'
       - "tmux"
 
+env:
+  TERM: xterm-256color
+
 colors:
   # COLORSCHEME: blood_moon.yaml
   # Default colors

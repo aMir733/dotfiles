@@ -4,12 +4,12 @@ set $left j
 set $down k
 set $up l
 set $right semicolon
-set $term x-terminal-emulator
-set $menu pgrep wofi && killall wofi || wofi --show drun
+set $term alacritty
+set $WOBVOLUMESOCK $XDG_RUNTIME_DIR/wobvolume.sock
 include /etc/sway/config-vars.d/*
 
 # Background
-output * bg /usr/share/backgrounds/sway/Sway_Wallpaper_Blue_1920x1080.png fill
+output * bg $HOME/Pictures/wallpapers/RXRLx6E.png fill
 
 # Floating windows
 for_window [title=".*"] floating enable
@@ -20,8 +20,8 @@ for_window [app_id=".*"] floating enable
 # Non-floating windows
 for_window [title="Alacritty"] floating disable
 for_window [title="Alacritty"] border none
-for_window [class="Firefox" window_role="browser"] floating disable
-for_window [class="Firefox" window_role="browser"] border none
+for_window [app_id="firefox" title="Mozilla Firefox$"] floating disable
+for_window [app_id="firefox" title="Mozilla Firefox$"] border none
 
 # No mouse hover focus
 focus_follows_mouse no
@@ -41,18 +41,34 @@ input type:pointer {
 # borders
 hide_edge_borders smart
 
-# Startup in specific workspaces
-exec swaymsg 'workspace 1; exec firefox'
-exec swaymsg 'workspace 2; exec alacritty'
 # Startups
+exec "nmcli c up $DEF_VPN"
+exec 'gentoo-pipewire-launcher'
 exec 'nm-applet --indicator'
-exec 'sleep 3; antimicro --tray'
+exec 'mako'
+exec 'sleep 3; antimicrox --tray'
+
+# Startup in specific workspaces
+exec swaymsg 'workspace 1; exec firefox-bin'
+exec swaymsg 'workspace 2; exec alacritty'
+exec swaymsg 'workspace 11'
+
+# wob
+exec rm -f $WOBVOLUMESOCK && mkfifo $WOBVOLUMESOCK && tail -f $WOBVOLUMESOCK | wob -a bottom -a right --background-color '#18181818'
+
+# Colors
+# class                 border  bground text    indicator child_border
+client.focused          #D6D8D4 #1E1E1E #FFFFFF #2B2B2B   #1C1C1C
+client.focused_inactive #333333 #5F676A #FFFFFF #484E50   #5F676A
+client.unfocused        #333333 #222222 #888888 #292D2E   #222222
+client.urgent           #2F343A #900000 #FFFFFF #900000   #900000
+client.placeholder      #000000 #0C0C0C #FFFFFF #000000   #0C0C0C
 
 
 # Bindings
 ## alt+tab / mod4+tab
 bindsym $mod+tab workspace back_and_forth
-bindsym Mod1+tab workspace back_and_forth
+#bindsym Mod1+tab workspace back_and_forth
 ## connect main VPN
 bindsym $mod+F1 exec "nmcli c up $DEF_VPN"
 bindsym $mod+F2 exec "nmcli c down $DEF_VPN"
@@ -63,16 +79,23 @@ bindsym XF86AudioPlay exec "playerctl play-pause"
 bindsym XF86AudioNext exec "playerctl next"
 bindsym XF86AudioPrev exec "playerctl previous"
 bindsym XF86AudioStop exec "playerctl stop"
+# volume control
+bindsym XF86AudioRaiseVolume exec set-volume 0.05
+bindsym XF86AudioLowerVolume exec set-volume -0.05
+bindsym XF86AudioMute exec set-volume mute
 ## change audio output
 bindsym $mod+F9 exec audio-output-switch
 ## border mouse clicks
 bindsym --border --release button2 kill
 bindsym --border --release button3 fullscreen
+## bring up powermenu
+bindsym $mod+F12 exec rofi-powermenu
+## bring up launcher
+bindsym $mod+d exec rofi-launcher
 
 
 bindsym $mod+Return exec $term
 bindsym $mod+Shift+c kill
-bindsym $mod+d exec $menu
 floating_modifier $mod normal
 bindsym $mod+Shift+r reload
 bindsym $mod+Shift+e exec swaynag -t warning -m 'You pressed the exit shortcut. Do you really want to exit sway? This will end your Wayland session.' -b 'Yes, exit sway' 'swaymsg exit'
@@ -107,6 +130,9 @@ bindsym $mod+7 workspace number 7
 bindsym $mod+8 workspace number 8
 bindsym $mod+9 workspace number 9
 bindsym $mod+0 workspace number 10
+# Next/Prev workspace
+bindsym $mod+period workspace next
+bindsym $mod+comma workspace prev
 # Move focused container to workspace
 bindsym $mod+Shift+1 move container to workspace number 1
 bindsym $mod+Shift+2 move container to workspace number 2

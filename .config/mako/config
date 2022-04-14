@@ -1,1 +1,7 @@
+background-color=#1E1E1E
+border-color=#FFFFFF
+border-size=1
 default-timeout=15000
+border-radius=5
+font=Open Sans 10
+anchor=bottom-right

@@ -1,0 +1,8 @@
+#!/bin/bash
+
+cd "$HOME"
+DOTFILES_LIST=.dotfiles.list
+DOTFILES_DEST=clones/dotfiles
+cat "$DOTFILES_LIST" | sed -E '/^$|^#/d' | while read line; do
+    cp --recursive --parents $line "$DOTFILES_DEST"
+done
