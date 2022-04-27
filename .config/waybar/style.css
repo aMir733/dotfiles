@@ -1,0 +1,134 @@
+@define-color bg #000000;
+@define-color fg #ffffff;
+@define-color dark #181818;
+@define-color light #272727;
+@define-color red #eb4d4b;
+
+* {
+    /* `otf-font-awesome` is required to be installed for icons */
+    font-family: Cantarell, "Font Awesome 6 Free Solid", "Font Awesome 6 Brands", "Font Awesome 6 Free Regular", Noto Sans;
+    font-size: 13px;
+    border: none;
+    border-radius: 5px;
+    padding: 0px;
+    margin: 0px;
+    margin-left: 1px;
+    margin-right: 1px;
+}
+
+window#waybar {
+    background-color: rgba(0, 0, 0, 0);
+    border-radius: 0px;
+    /*
+    color: @fg;
+    transition-property: background-color;
+    transition-duration: .5s;
+    */
+}
+
+#tray,
+#custom-powermenu,
+#clock {
+    padding: 0px 6px;
+    background: @dark;
+    margin-top: 6px;
+    margin-bottom: 6px;
+
+}
+
+#cpu,
+#temperature,
+#memory,
+#mode,
+#disk,
+#custom-audio,
+#language,
+#network,
+#custom-launcher,
+#custom-keyboard,
+#custom-netusage {
+    /*
+    padding: 0 0;
+    */
+    border-radius: 0px;
+    padding: 5px 6px;
+    background: @dark;
+    /*
+    border-top: solid 1px @fg;
+    border-bottom: solid 1px @fg;
+    */
+    margin: 6px 0px;
+}
+
+#cpu {
+    /*
+    border-left: solid 1px @fg;
+    */
+    border-radius: 6px 0px 0px 6px;
+}
+
+#custom-netusage {
+    /*
+    border-right: solid 1px @fg;
+    */
+    border-radius: 0px 6px 6px 0px;
+}
+
+#tray {
+    margin-right: 0px;
+    border-top-right-radius: 0px;
+    border-bottom-right-radius: 0px;
+}
+
+#custom-powermenu {
+    margin-left: 0px;
+    border-top-left-radius: 0px;
+    border-bottom-left-radius: 0px;
+}
+
+#workspaces button {
+    color: @fg;
+    padding: 0px 5px 0px 5px;
+    margin-top: 6px;
+    margin-bottom: 6px;
+}
+
+#workspaces button:hover {
+    background: rgba(0, 0, 0, 0.2);
+    box-shadow: inset 0 -3px #ffffff;
+}
+
+#workspaces button.focused {
+    background-color: @light;
+}
+
+#workspaces button.urgent {
+    background-color: @red;
+}
+
+#taskbar {
+    margin: 0px;
+}
+
+#taskbar button {
+    padding: 6px;
+}
+
+#taskbar button.active {
+    border-radius: 0px;
+    border-top: 1px solid #ffffff;
+}
+
+label:focus {
+    background-color: #000000;
+}
+
+
+#tray > .passive {
+    -gtk-icon-effect: dim;
+}
+
+#tray > .needs-attention {
+    -gtk-icon-effect: highlight;
+    background-color: #eb4d4b;
+}

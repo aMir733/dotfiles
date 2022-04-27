@@ -1,0 +1,6 @@
+#!/bin/bash
+
+# emerge
+sudo emerge --sync || (nmcli c up $DEF_VPN && sudo emerge --sync)
+sudo emerge --update --deep --changed-use @world
+sudo smart-live-rebuild

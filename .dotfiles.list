@@ -1,0 +1,36 @@
+# files to cp
+
+# waybar
+.config/waybar/style.css
+.config/waybar/config
+.config/waybar/gaps
+.config/waybar/gaps.css
+.config/waybar/modules/*
+
+.config/MangoHud/MangoHud.conf
+
+.config/nvim/init.vim
+
+.config/mpv/*
+
+.config/alacritty/alacritty.yml
+
+.config/wayfire.ini
+
+.config/mako/config
+
+.config/rofi/*
+
+.config/antimicrox/*
+
+# Wallpapers
+Pictures/wallpapers/*
+
+# home
+.profile
+.tmux.conf
+.zshrc
+.dotfiles.list
+
+# bin
+bin/*

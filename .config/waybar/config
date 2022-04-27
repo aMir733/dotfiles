@@ -1,0 +1,99 @@
+{
+    "position": "top",
+    "layer": "bottom",
+    "height": 28,
+    "spacing": 0,
+    "modules-left": ["wlr/taskbar"],
+    //"modules-center": ["cpu", "memory", "disk", "custom/audio", "network", "custom/netusage"],
+    "modules-right": ["tray", "custom/keyboard", "custom/launcher", "custom/powermenu", "custom/separator", "clock"],
+
+    "sway/workspaces": {
+        "format": "{icon}"
+    },
+    "sway/mode": {
+        "format": "<span style=\"italic\">{}</span>"
+    },
+    "tray": {
+        "icon-size": 14,
+        "spacing": 10
+    },
+    "clock": {
+        "tooltip-format": "<big>{:%Y %B}</big>\n<tt><small>{calendar}</small></tt>",
+        "today-format": "<b>{}</b>",
+        "format": "{:<b>%H:%M</b>  | <b>%e %b</b>}",
+        //"format": "{:<b>%H:%M</b>}",
+        //"format-alt": "{:<b>%e %b</b>  |  <b>%H:%M</b>}"
+    },
+    "cpu": {
+        "format": "cpu:{usage}",
+        "tooltip": false
+    },
+    "memory": {
+        "interval": 30,
+        "format": "mem:{percentage}",
+        "max-length": 10
+    },
+    "network": {
+        "interface": "usb0",
+        "format": "down:{bandwidthUpBytes} up:{bandwidthDownBytes}",
+        "format-disconnected": "",
+        "tooltip-format": "{ifname}",
+        "interval": 2
+    },
+    "disk": {
+        "interval": 90,
+        "format": "ssd:{free}",
+        "path": "/"
+    },
+    "wlr/taskbar": {
+        "format": "{icon}",
+        "tooltip-format": "{title}",
+        "icon-theme": "Adwaita",
+        "icon-size": 24,
+        "on-click": "minimize-raise",
+        "on-click-middle": "close"
+    },
+    "custom/keyboard":{
+        "format": "",
+        "on-click": "keyboard-toggle"
+    },
+    "custom/launcher":{
+        "format": "",
+        "tooltip": false,
+        "on-click": "rofi-launcher"
+    },
+    "custom/powermenu":{
+        "format": "",
+        "tooltip": false,
+        "on-click": "rofi-powermenu"
+    },
+    "custom/separator": {
+        "format": "|",
+        "interval": "once",
+        "tooltip": false
+    },
+    "custom/audio": {
+        "format": "{icon}-vol:{}",
+        "format-icons": {
+            "hdmi": "tv",
+            "headphone": "hp",
+            "buds": "bt",
+            "other": "",
+            //"default": ["","","",""]
+        },
+        "exec": "~/.config/waybar/modules/audio.sh",
+        "exec-on-event": true,
+        "return-type": "json",
+        "interval": 3,
+        "on-click": "pavucontrol",
+        "on-click-right": "audio-output-switch",
+        "on-scroll-up": "set-volume 0.01",
+        "on-scroll-down": "set-volume -0.01"
+    },
+    "custom/netusage": {
+        "format": "usage:{}",
+        "exec": "vnstat -i usb0 -d --short | grep today | awk '{ print $8,$9 }'",
+        "interval": 60
+    }
+}
+
