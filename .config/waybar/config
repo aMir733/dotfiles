@@ -5,7 +5,7 @@
     "spacing": 0,
     "modules-left": ["wlr/taskbar"],
     //"modules-center": ["cpu", "memory", "disk", "custom/audio", "network", "custom/netusage"],
-    "modules-right": ["tray", "custom/keyboard", "custom/launcher", "custom/powermenu", "custom/separator", "clock"],
+    "modules-right": ["custom/keyboard", "tray", "custom/audio-volume", "custom/audio-output", "custom/launcher", "custom/powermenu", "custom/separator", "clock"],
 
     "sway/workspaces": {
         "format": "{icon}"
@@ -73,7 +73,7 @@
         "tooltip": false
     },
     "custom/audio": {
-        "format": "{icon}-vol:{}",
+        "format": "{icon}",
         "format-icons": {
             "hdmi": "tv",
             "headphone": "hp",
@@ -87,6 +87,31 @@
         "interval": 3,
         "on-click": "pavucontrol",
         "on-click-right": "audio-output-switch",
+        "on-scroll-up": "set-volume 0.01",
+        "on-scroll-down": "set-volume -0.01"
+    },
+    "custom/audio-output": {
+        "format": "{icon}",
+        "format-icons": {
+            "hdmi": "",
+            "headphone": "",
+            "buds": "",
+            "other": ""
+        },
+        "exec": "~/.config/waybar/modules/audio-output.sh",
+        "exec-on-event": true,
+        "return-type": "json",
+        "interval": 2,
+        "on-click": "pavucontrol",
+        "on-click-right": "audio-output-switch"
+    },
+    "custom/audio-volume": {
+        "format": "{icon}",
+        "format-icons": ["", ":", ""],
+        "exec": "~/.config/waybar/modules/audio-volume.sh",
+        "exec-on-event": true,
+        "return-type": "json",
+        "interval": 3,
         "on-scroll-up": "set-volume 0.01",
         "on-scroll-down": "set-volume -0.01"
     },

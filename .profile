@@ -8,6 +8,7 @@ EDITOR=nvim
 XDG_CONFIG_HOME=$HOME/.config
 XDG_CURRENT_DESKTOP=Unity
 GRIM_DEFAULT_DIR=$HOME/Pictures/screenshots
+WOBVOLUMESOCK=$XDG_RUNTIME_DIR/wobvolume.sock
 
 DEF_TERM=alacritty
 DEF_EDITOR=nvim
