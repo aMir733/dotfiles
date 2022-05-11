@@ -1,0 +1,9 @@
+[$Version]
+update_info=kscreenlocker.upd:0.1-autolock
+
+[Daemon]
+LockGrace=45
+Timeout=30
+
+[Greeter][Wallpaper][org.kde.image][General]
+Image=/home/amir/Pictures/wallpapers/wallhaven-72k3l3_1920x1080.png

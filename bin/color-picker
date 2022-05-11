@@ -1,0 +1,25 @@
+#!/bin/bash
+
+# This script picks a color from the screen and prints it to the screen. at the moment the grim/slurp method
+# does not work on kde (5.24.5)
+# slurp on kde can't capture the mouse cursor so mode_2 is recommended
+
+DEF_MODE=mode_2
+OUT_FORMAT='{ printf "%s",$3 }'
+
+mode_1 () {
+    TMP_FILE="$XDG_RUNTIME_DIR/tmp.png"
+    spectacle -nbo "$TMP_FILE" 2>/dev/null
+    convert "$TMP_FILE" -crop 1x1+$(slurp -p -f %x+%y) -depth 8 txt: | grep "0,0" | awk "$OUT_FORMAT"
+    rm -f "$TMP_FILE"
+}
+
+mode_2 () {
+    spectacle -rnbo /dev/stdout 2>/dev/null | convert - -crop 1x1+0+0 -depth 8 txt: | grep "0,0" | awk "$OUT_FORMAT"
+}
+
+case "$1" in
+    1) mode_1 ;;
+    2) mode_2 ;;
+    *) $DEF_MODE ;;
+esac

@@ -1,0 +1,53 @@
+# kde
+.config/gtk-2.0
+.config/gtk-3.0
+.config/gtk-4.0
+.config/kate
+.config/Kvantum
+.config/latte
+.config/dolphinrc
+.config/katerc
+.config/konsolerc
+.config/kcminputrc
+.config/kdeglobals
+.config/kglobalshortcutsrc
+.config/klipperrc
+.config/krunnerrc
+.config/kscreenlockerrc
+.config/ksmserverrc
+.config/kwinrc
+.config/kwinrulesrc
+.config/plasma-org.kde.plasma.desktop-appletsrc
+.config/plasmarc
+.config/plasmashellrc
+.config/gtkrc
+.config/gtkrc-2.0
+.config/lattedockrc
+.config/breezerc
+.config/oxygenrc
+.config/lightlyrc
+.config/ksplashrc
+.config/khotkeysrc
+
+.config/MangoHud/MangoHud.conf
+
+.config/nvim/init.vim
+
+.config/mpv/*
+
+.config/alacritty/alacritty.yml
+
+.config/antimicrox/*
+
+# Wallpapers
+Pictures/wallpapers/*
+
+# home
+startup-kde.sh
+.profile
+.tmux.conf
+.zshrc
+.dotfiles-kde.list
+
+# bin
+bin/*

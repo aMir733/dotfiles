@@ -1,0 +1,16 @@
+[$Version]
+update_info=ksmserver_update_loginMode_value.upd:ksmserver_update_loginMode_value_default_enum
+
+[General]
+loginMode=emptySession
+
+[LegacySession: saved at previous logout]
+count=0
+
+[Session: saved at previous logout]
+clientId1=103733330000165169818500000039820004
+count=1
+program1=firefox
+restartCommand1=/usr/bin/firefox-bin,--sm-client-id,103733330000165169818500000039820004
+restartStyleHint1=0
+userId1=amir

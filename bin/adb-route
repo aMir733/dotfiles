@@ -19,4 +19,4 @@ adb -s $ADB_DEVICE shell 'iptables -P FORWARD ACCEPT'
 echo sudo ip route add $(echo "$REMOTE_IP" | awk -F'.' '{ print $1"."$2"."$3".0/24"}') via $ROUTER_IP dev $LOCAL_INTERFACE
 sudo ip route add $(echo "$REMOTE_IP" | awk -F'.' '{ print $1"."$2"."$3".0/24"}') via $ROUTER_IP dev $LOCAL_INTERFACE
 
-for i in {1..254} ;do (ping -c 1 $(adb -s $ADB_DEVICE shell ifconfig $REMOTE_INTERFACE | grep "inet " | awk '{ print $2 }' | tr -d 'addr:' | head -n 1 | awk -F'.' '{ print $1"."$2"."$3"." }')$i | grep "bytes from" &) ;done
+#for i in {1..254} ;do (ping -c 1 $(adb -s $ADB_DEVICE shell ifconfig $REMOTE_INTERFACE | grep "inet " | awk '{ print $2 }' | tr -d 'addr:' | head -n 1 | awk -F'.' '{ print $1"."$2"."$3"." }')$i | grep "bytes from" &) ;done

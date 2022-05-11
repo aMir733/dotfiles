@@ -1,0 +1,13 @@
+[General]
+Version=201
+ViewPropsTimestamp=2022,5,4,21,48,10.886
+
+[KFileDialog Settings]
+Places Icons Auto-resize=false
+Places Icons Static Size=22
+
+[MainWindow]
+HDMI-A-1 Height 1920x1080=779
+HDMI-A-1 Width 1920x1080=1494
+MenuBar=Disabled
+ToolBarsMovable=Disabled

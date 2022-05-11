@@ -1,0 +1,12 @@
+[$Version]
+update_info=kwinrules.upd:replace-placement-string-to-enum,kwinrules.upd:use-virtual-desktop-ids
+
+[b1474973-5c7d-46e4-95b8-0ae05871f6bc]
+Description=Transparent bar
+maximizevert=true
+maximizevertrule=2
+opacityactive=70
+opacityactiverule=2
+opacityinactive=70
+opacityinactiverule=2
+types=5

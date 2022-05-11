@@ -1,0 +1,63 @@
+[KFileDialog Settings]
+Recent Files[$e]=RXRLx6E.png,file:$HOME/Pictures/wallpapers/wallhaven-pkmkp9_1920x1080.png,file:$HOME/Pictures/wallpapers/wallhaven-72k3l3_1920x1080.png,file:$HOME/Pictures/wallpapers/wallhaven-8o8owk_1920x1080.png,file:$HOME/Pictures/wallpapers/wallhaven-6o1kyq_1920x1080.png,file:$HOME/Pictures/wallpapers/RXRLx6E.png
+Recent URLs[$e]=file:$HOME/Pictures/wallpapers/
+detailViewIconSize=16
+
+[PlasmaTransientsConfig]
+PreloadWeight=0
+lastScreen=0
+
+[PlasmaTransientsConfig][ConfigDialog]
+DialogHeight=76
+DialogWidth=1920
+
+[PlasmaViews][Panel 2]
+alignment=132
+floating=0
+panelOpacity=1
+panelVisibility=0
+
+[PlasmaViews][Panel 2][Defaults]
+maxLength=1080
+minLength=1080
+thickness=24
+
+[PlasmaViews][Panel 2][Horizontal1920]
+maxLength=1920
+minLength=1920
+thickness=24
+
+[PlasmaViews][Panel 2][Vertical1080]
+maxLength=1080
+minLength=1080
+thickness=30
+
+[PlasmaViews][Panel 24]
+alignment=132
+floating=1
+
+[PlasmaViews][Panel 24][Defaults]
+maxLength=386
+minLength=278
+thickness=28
+
+[PlasmaViews][Panel 24][Horizontal1920]
+maxLength=386
+minLength=278
+thickness=28
+
+[PlasmaViews][Panel 26]
+floating=1
+
+[PlasmaViews][Panel 26][Defaults]
+maxLength=595
+minLength=210
+thickness=28
+
+[PlasmaViews][Panel 26][Horizontal1920]
+maxLength=595
+minLength=210
+thickness=28
+
+[Updates]
+performed=/usr/share/plasma/shells/org.kde.plasma.desktop/contents/updates/maintain_existing_desktop_icon_sizes.js,/usr/share/plasma/shells/org.kde.plasma.desktop/contents/updates/digitalclock_rename_timezonedisplay_key.js,/usr/share/plasma/shells/org.kde.plasma.desktop/contents/updates/containmentactions_middlebutton.js,/usr/share/plasma/shells/org.kde.plasma.desktop/contents/updates/no_middle_click_paste_on_panels.js,/usr/share/plasma/shells/org.kde.plasma.desktop/contents/updates/obsolete_kickoffrc.js,/usr/share/plasma/shells/org.kde.plasma.desktop/contents/updates/systemloadviewer_systemmonitor.js,/usr/share/plasma/shells/org.kde.plasma.desktop/contents/updates/klipper_clear_config.js,/usr/share/plasma/shells/org.kde.plasma.desktop/contents/updates/unlock_widgets.js,/usr/share/plasma/shells/org.kde.plasma.desktop/contents/updates/move_desktop_layout_config.js

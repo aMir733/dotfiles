@@ -1,0 +1,17 @@
+[$Version]
+update_info=delete_cursor_old_default_size.upd:DeleteCursorOldDefaultSize,kcminputrc_fix_botched_5_21_0.upd:kcminputrc_fix_botched_5_21_0_pre,kcminputrc_fix_botched_5_21_0.upd:kcminputrc_fix_botched_5_21_0,kcminputrc_repeat.upd:kcminputrc_migrate_key_repeat
+
+[Keyboard]
+RepeatDelay=450
+RepeatRate=40.6
+
+[Libinput][1133][16471][Logitech B330/M330/M331]
+PointerAcceleration=0.000
+PointerAccelerationProfile=1
+
+[Mouse]
+XLbInptAccelProfileFlat=true
+cursorTheme=Simp1e
+
+[Tmp]
+update_info=delete_cursor_old_default_size.upd:DeleteCursorOldDefaultSize
