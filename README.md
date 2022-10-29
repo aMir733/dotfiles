@@ -7,5 +7,3 @@
 - Text Editor: [neovim](https://neovim.io/)
 - Shell: [ZSH | Oh My Zsh](https://ohmyz.sh/)
 - Distro: [Gentoo](https://www.gentoo.org/)
-
-# Screenshots

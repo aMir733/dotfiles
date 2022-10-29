@@ -1,7 +1,0 @@
-#!/bin/bash
-show_keyboard () { busctl call --user sm.puri.OSK0 /sm/puri/OSK0 sm.puri.OSK0 SetVisible b $1 ; }
-case "$(busctl --user get-property sm.puri.OSK0 /sm/puri/OSK0 sm.puri.OSK0 Visible)" in
-    "b false") show_keyboard true ;;
-    "b true") show_keyboard false ;;
-    *) squeekboard &>/dev/null & sleep 0.1 && show_keyboard true ;;
-esac
