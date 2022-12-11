@@ -26,7 +26,7 @@ DEF_WEB=firefox
 
 # -- Aliases --
 alias c=/bin/cat
-alias cat=bat
+alias cat="bat --paging=never --plain"
 alias x-copy='xclip -selection clipboard'
 # -- Aliases --
 
